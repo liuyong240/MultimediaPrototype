@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="org.multimediaprototype.admin.dao.MTSJobTemplateMapper">
+
+    <select id="getJobTemplate" resultType="org.multimediaprototype.admin.model.MTSJobTemplate">
+        SELECT * FROM mts_job_template
+        <where>
+            <if test="id != -1">
+                AND `id` = #{id}
+            </if>
+            <if test="name != null">
+                AND `name` LIKE "%"#{name}"%"
+            </if>
+            <if test="adminId != -1">
+                AND `adminId` = #{adminId}
+            </if>
+            <if test="using != null">
+                AND `using` = #{using}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertJobTemplate">
+        INSERT INTO mts_job_template (`name`, `desc`, `outputs`, `outputBucket`, `outputLocation`, `pipelineId`, `adminId`, `lastUpdate`, `using`)
+          VALUES (#{name}, #{desc}, #{outputs}, #{outputBucket}, #{outputLocation}, #{pipelineId}, #{adminId}, #{lastUpdate}, #{using})
+    </insert>
+
+    <update id="updateJobTemplate">
+        UPDATE `mts_job_template` SET
+          `name`=#{name},
+          `desc`=#{desc},
+          `outputs`=#{outputs},
+          `outputBucket`=#{outputBucket},
+          `outputLocation`=#{outputLocation},
+          `pipelineId`=#{pipelineId},
+          `adminId`=#{adminId},
+          `lastUpdate`=#{lastUpdate},
+          `using`=#{using}
+        WHERE `id`=#{id}
+    </update>
+
+    <delete id="deleteJobTemplate">
+        DELETE FROM mts_job_template WHERE id=#{id}
+    </delete>
+
+</mapper>

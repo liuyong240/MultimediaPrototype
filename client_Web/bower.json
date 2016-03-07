@@ -1,0 +1,36 @@
+{
+  "name": "MoBench",
+  "description": "Alibench-MoBench",
+  "main": "app.js",
+  "authors": [
+    "zhuzhen zhuzhen"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "koa",
+    "vote",
+    "poll",
+    "mongodb"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/bower_components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery-validation": "jquery-validate#~1.14.0",
+    "underscore": "~1.8.3",
+    "requirejs": "~2.1.20",
+    "jqueryui-timepicker-addon": "~1.5.5",
+    "datatables.net": "~1.10.10",
+    "datatables.net-bs": "~1.10.10",
+    "mediaelement": "~2.18.2",
+    "jquery_lazyload": "jquery.lazyload#~1.9.7"
+  }
+}

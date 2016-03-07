@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans.xsd
+					http://www.springframework.org/schema/security
+					http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <beans profile="dev">
+        <security:http auto-config="true" use-expressions="false" entry-point-ref="restAuthenticationEntryPoint">
+
+            <security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+            <!-- iframe需要disable headers才能正常显示 -->
+            <security:headers disabled="true"/>
+            <security:csrf disabled="true"/>
+            <security:logout logout-url="/auth/logout" logout-success-url="/"/>
+
+            <security:form-login login-page="/auth/login"
+                                 login-processing-url="/auth/api/login"
+                                 username-parameter="username"
+                                 password-parameter="password"
+                                 authentication-success-handler-ref="restAuthenticationSuccessHandler"
+                                 authentication-failure-handler-ref="authFailureHandlerDev"/>
+
+        </security:http>
+
+        <security:authentication-manager>
+            <security:authentication-provider ref="authenticationProviderCustom"/>
+        </security:authentication-manager>
+
+        <bean id="authFailureHandlerDev"
+              class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
+    </beans>
+    <beans profile="prod">
+
+        <security:http auto-config="true" use-expressions="false" entry-point-ref="restAuthenticationEntryPoint">
+
+            <security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+            <!--<security:intercept-url pattern="/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
+            <security:intercept-url pattern="/auth/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+            <security:intercept-url pattern="/api/auth/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+            <security:intercept-url pattern="/javadoc_statics/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+            <security:intercept-url pattern="/admin/api/video/listMyVideo" access="ROLE_USER,ROLE_ADMIN"/>
+            <security:intercept-url pattern="/admin/api/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+            <security:intercept-url pattern="/info/issues/**" access="ROLE_ADMIN"/>
+            <security:intercept-url pattern="/info/docs/**" access="ROLE_ADMIN"/>
+            <security:intercept-url pattern="/info/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+            <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+            <security:intercept-url pattern="/api/**" access="ROLE_ADMIN, ROLE_USER"/>
+            <security:intercept-url pattern="/swagger/**" access="ROLE_ADMIN"/>
+
+            <!-- iframe需要disable headers才能正常显示 -->
+            <security:headers disabled="true"/>
+
+            <security:csrf disabled="true"/>
+
+            <security:access-denied-handler error-page="/auth/error.html"/>
+            <!--<security:remember-me/>-->
+            <security:logout logout-url="/auth/logout" logout-success-url="/"/>
+
+            <security:form-login login-page="/auth/login"
+                                 login-processing-url="/auth/api/login"
+                                 username-parameter="username"
+                                 password-parameter="password"
+                                 authentication-success-handler-ref="restAuthenticationSuccessHandler"
+                                 authentication-failure-handler-ref="authFailureHandlerProd"/>
+
+        </security:http>
+
+        <security:authentication-manager>
+            <security:authentication-provider ref="authenticationProviderCustom"/>
+        </security:authentication-manager>
+
+        <bean id="authFailureHandlerProd"
+              class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
+    </beans>
+
+</beans>

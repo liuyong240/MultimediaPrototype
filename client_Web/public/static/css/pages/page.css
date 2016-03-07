@@ -1,0 +1,209 @@
+/* common */
+.m-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.mr-20 {
+	margin-right: 20px;
+}
+
+label.error {
+	color: #f00;
+}
+
+#btn_upload {
+	color: #fff;
+	line-height: 1.5;
+	background-color: #31b0d5;
+	border-color: #269abc;
+	padding: 5px 10px;
+	margin-top: 10px;
+
+}
+
+.error-tip,
+.success-tip{
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+	width: 100%;
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+	padding: 15px 0;
+	background-color: #D9534F;
+	z-index: 9;
+}
+.success-tip {
+	background-color: #5cb85c;
+}
+
+/* login page */
+.login-wrap {
+	background-color: #7A868F;
+}
+
+.login-wrap .glyphicon-ok {
+	display: none;
+}
+
+.login-wrap .login-box {
+	opacity: 0.5;
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 20px 20px 10px;
+	margin: 100px auto 0;
+}
+
+.login-wrap .login-box form {
+	margin: 20px auto 0;
+}
+
+.login-wrap .login-box .btn-bar .btn {
+	width: 45%;
+}
+
+.login-wrap .login-box .btn-bar button.btn {
+	margin-right: 4%;
+}
+
+/* home page */
+.home-wrap .videos {
+}
+
+.home-wrap .videos li {
+	list-style: none;
+	border-bottom: 1px dashed #eee;
+	margin-bottom: 10px;
+}
+.home-wrap .videos li .r-p-author {
+	color: #b8b1b4;
+}
+.home-wrap .videos li .r-p-author span {
+	margin-right : 10px;
+}
+.home-wrap .videos li .r-p-author span em {
+	font-style: normal;
+}
+
+.home-wrap .videos li .r-p-pic a {
+	display: block;
+	height: 260px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.home-wrap .videos .ul-wrap-thumb li {
+	border-bottom: 0px;
+	margin-bottom : 20px;
+}
+.home-wrap .videos .ul-wrap-thumb li p.r-p-des {
+	height: 40px;
+	overflow: hidden;
+}
+
+
+.home-wrap .videos .r-p-pic {
+	position: relative;
+	z-index: 9;
+}
+
+.home-wrap .videos .r-p-pic {
+	position: relative;
+	z-index: 9;
+}
+
+.home-wrap .videos .r-p-pic {
+	padding: 4px;
+	border: 1px solid #eee;
+}
+
+.home-wrap .videos .r-p-pic .r-btn-close {
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	color: #ffffff;
+	font-size: 22px;
+	line-height: 28px;
+	text-align: center;
+	background-color: #fc575e;
+	cursor: pointer;
+	z-index: 99;
+}
+
+.home-wrap .videos .r-p-pic .r-btn-close:hover {
+	background: #bc171e;
+}
+
+/* upload page */
+.upload-wrap h2 {
+	border-bottom: 1px dashed #eee;
+	padding: 20px 0;
+	margin-bottom: 20px;
+}
+
+.upload-wrap .btn-bar {
+	border-top: 1px dashed #eee;
+	padding: 20px 0;
+	margin-top: 10px;
+}
+
+.upload-wrap .btn-bar .btn {
+	margin-right: 20px;
+}
+
+/* video page */
+.video-wrap .video-detail {
+	color: #81767a;
+	font-size: 14px;
+	background-color: #f4f5f7;
+	padding-bottom: 10px;
+}
+
+.video-wrap .video-detail h3 {
+	color: #445566;
+	font-size: 20px;
+	padding: 0px 20px;
+}
+
+.video-wrap .video-detail .video-cont {
+	padding: 0px 20px;
+}
+
+/* ========== 备用 ========== */
+
+/* 资源 tab */
+#table_monitor_resource .dataTables_wrapper,
+#table_monitor_ps .dataTables_wrapper {
+	margin-bottom: 40px;
+}
+
+/* reset Timepicker */
+.ui-timepicker-div dt {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+/* ajax loading */
+.ajax-loading-wrap {
+	position: relative;
+	width: 100%;
+	height: 240px;
+	z-index: 9;
+}
+
+.ajax-loading-wrap .ajax-loading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 50px;
+	margin: -25px 0 0 -25px;
+	z-index: 99;
+}

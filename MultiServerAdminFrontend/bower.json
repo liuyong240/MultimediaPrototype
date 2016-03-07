@@ -1,0 +1,14 @@
+{
+  "name": "multimedia_admin",
+  "version": "0.0.1",
+  "dependencies": {
+    "kai": "0.1.4",
+    "lodash": "3.10.1",
+    "angular-ui-select": "~0.11.2",
+    "angular-ui-router": "~0.2.15",
+    "jsoneditor": "~4.2.1",
+    "ng-file-upload-shim": "~10.1.0",
+    "oss-js-upload": "~0.5.0"
+  },
+  "devDependencies": {}
+}

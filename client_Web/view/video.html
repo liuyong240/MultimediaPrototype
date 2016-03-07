@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block js %}
+    <script data-main="/static/js/pages/video" src="/static/libs/requirejs/require.js"></script>
+{% endblock %}
+
+{% block bodyClass %}video-wrap{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 video-play">
+                <div class="row">
+                    <p>
+                        <video style="width: 100%; height: 100%;"
+                               preload="none">
+                            <source type="video/mp4" src="http://{{domain}}:{{port}}{{ data.mediaURL }}"/>
+                            <source type="video/webm" src="http://{{domain}}:{{port}}{{ data.mediaURL }}"/>
+                        </video>
+                    </p>
+                    <h3>{{ data.baseInfo.title|default("默认标题") }}</h3>
+                    <div class="video-cont">
+                        <p>{{ data.baseInfo.description|default("默认描述") }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+{% endblock %}

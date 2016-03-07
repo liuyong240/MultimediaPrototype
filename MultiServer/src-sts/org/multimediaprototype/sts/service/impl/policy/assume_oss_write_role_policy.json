@@ -1,0 +1,10 @@
+{
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": "acs:ram::{accountId}:role/{roleName}"
+    }
+  ],
+  "Version": "1"
+}

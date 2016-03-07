@@ -1,0 +1,74 @@
+//
+   Created by yangdongxu on 15/11/19.
+
+div(ng-init="init()",style="padding:10px 20px;margin-top:20px;")
+    a(ui-sref='mts.wmList')
+        i.fa.fa-arrow-circle-left
+        | &nbsp;返回列表
+    h1
+        | {{baseInfo.title}}
+    hr
+    div(ng-if="!loaded")
+        span.fa.fa-spin.fa-spinner
+        | &nbsp;加载中...
+    form.kai-form.col-md-7(ng-if="loaded",
+    style="padding-bottom:100px",
+    ng-submit="submitHandler()")
+        // ----- base ------
+        h2 转码文件设置
+        .form-group
+            label
+                b.text-danger *&nbsp;
+                b 水印模板名称
+            input.form-control(type="text",
+            ng-required="true", ng-minlength="1", ng-maxlength="64",
+            ng-pattern="/^[\u4e00-\u9fa5_a-zA-Z0-9-\%\.]{0,}$/",
+            ng-model="template.name")
+            span.help-block
+                | 1.只能包含中英文、数字、_-.%
+                br
+                | 2.转码模板名称长度限制在128个字节之内
+        .form-group
+            label
+                b.text-danger *&nbsp;
+                b 水印位置
+            select.form-control(ng-model="template.config.referPos", ng-required="true")
+                option(ng-repeat="op in formBasic.referPos", value="{{op}}") {{op}}
+
+        .form-group
+            label
+                b 水印宽度(px)
+            input.form-control(type="text",
+            text-range, text-min="8", text-max="4096",
+            ng-model="template.config.width")
+            span.help-block 值范围[8,4096]
+        .form-group
+            label
+                b 水印高度(px)
+            input.form-control(type="text",
+            text-range, text-min="8", text-max="4096",
+            ng-model="template.config.height")
+            span.help-block 值范围[8,4096]
+        .form-group
+            label
+                b 水平偏移量(px)
+            input.form-control(type="text",
+            text-range, text-min="-4096", text-max="4096",
+            ng-model="template.config.dx")
+            span.help-block 值范围[-4096,4096]
+        .form-group
+            label
+                b 垂直偏移量(px)
+            input.form-control(type="text",
+            text-range, text-min="-4096", text-max="4096",
+            ng-model="template.config.dy")
+            span.help-block 值范围[-4096,4096]
+
+
+        button.btn.btn-lg.btn-success(type="submit")
+            i.fa.fa-check
+            |&nbsp;确定
+
+
+
+

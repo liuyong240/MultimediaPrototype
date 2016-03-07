@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+
+<generatorConfiguration >
+	<classPathEntry location="D:\mysql-connector-java-5.1.24-bin.jar"/>
+  <context id="context1" >
+    <jdbcConnection 
+    	driverClass="com.mysql.jdbc.Driver" 
+    	connectionURL="jdbc:mysql://rds7z7rovo6l1p1mtmsw7.mysql.rds.aliyuncs.com:3306/multimediaprototype" 
+    	userId="prototype" password="prototype" />
+    <javaModelGenerator targetPackage="org.multimediaprototype.oss.dao.model" targetProject="MultiServer" />
+    <sqlMapGenerator targetPackage="org.multimediaprototype.oss.dao.mapper.xml" targetProject="MultiServer" />
+    <javaClientGenerator targetPackage="org.multimediaprototype.oss.dao.mapper" targetProject="MultiServer" type="XMLMAPPER" />
+    <!-- 
+    <table tableName="users_friend" >
+    </table> -->
+    
+    
+<table schema="multimediaprototype" tableName="oss_file" domainObjectName="OSSFile"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+ </table>
+    
+    
+  </context>
+</generatorConfiguration>

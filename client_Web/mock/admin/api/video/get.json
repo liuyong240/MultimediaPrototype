@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "data": {
+    "baseInfo": {
+      "id": 1,
+      "mediaId": 29,
+      "picId": 30,
+      "description": "9898",
+      "isDelete": false,
+      "gmtCreated": 1448938423000,
+      "status": 0
+    },
+    "mediaURL": "/admin/api/video/file/oss-cn-hangzhou/multimedia-input/input/1448938420485334.jpg",
+    "picURL": "/admin/api/video/file/oss-cn-hangzhou/multimedia-input/input/1448938422517181.xlsx"
+  },
+  "error": null
+}

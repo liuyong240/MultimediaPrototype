@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+
+{% block js %}
+	<script data-main="/static/js/pages/home" src="/static/libs/requirejs/require.js"></script>
+{% endblock %}
+
+{% block bodyClass %}home-wrap{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<h2>所有视频</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row tool-bar">
+					<p class="text-right">
+						<button data-type="view_list" type="button" class="btn btn-info btn-sm">
+							<span class="glyphicon glyphicon-th-list"></span>
+						</button>
+						<button data-type="view_thumb" type="button" class="btn btn-default btn-sm">
+							<span class="glyphicon glyphicon-th-large "></span>
+						</button>
+					</p>
+				</div>
+				<div class="row">
+					<div class="videos">
+						<div class="ul-wrap">
+							<ul class="clearfix">
+								{% for val in data.list %}
+									<li class="row" data-data="{{ val|json }}">
+										<p class="r-p-pic col-md-4">
+											<a href="/video/get/{{ val.id }}"><img class="lazy" data-original="http://{{ domain }}:{{ port }}{{ val.pic_url }}" alt="加载中..." width="100%"/></a>
+										</p>
+										<div class="r-div-cont col-md-8">
+											<h4>
+												<a href="/video/get/{{ val.id }}"><span>{{ val.title }}</span></a>
+											</h4>
+											<p class="r-p-author">
+												<span>作者 : <em>{{ val.username|default('null') }}</em></span>
+												<span>上传时间 : <em>{{ val.gmt_created|date('Y-m-d') }}</em></span>
+											</p>
+											<p class="r-p-des">{{ val.description }}</p>
+										</div>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<nav class="text-center">
+						<ul class="pagination">
+							{% set prev = pageNumber - 1 %}
+							{% set next = parseInt(pageNumber,10) + 1 %}
+
+							{% if totalPage < 2 or pageNumber == 1 %}
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+												aria-hidden="true">&laquo;</span></a></li>
+							{% else %}
+								<li><a href="/?pageNumber={{ prev }}&totalPage={{ totalPage }}"
+								       aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+							{% endif %}
+
+							{% set totalPageAsArray = Array(totalPage) %}
+							{% for key,val in totalPageAsArray %}
+								{% set index = key + 1 %}
+								{% if index == pageNumber %}
+									<li class="active"><a href="#">{{ index }} <span
+													class="sr-only">(current)</span></a></li>
+								{% else %}
+									<li class=""><a
+												href="/?pageNumber={{ index }}&totalPage={{ totalPage }}">{{ index }}
+											<span class="sr-only"></span></a></li>
+								{% endif %}
+							{% endfor %}
+
+							{% if totalPage == pageNumber %}
+								<li class="disabled"><a href="#" aria-label="Next"><span
+												aria-hidden="true">&raquo;</span></a></li>
+							{% else %}
+								<li><a href="/?pageNumber={{ next }}&totalPage={{ totalPage }}"
+								       aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+							{% endif %}
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

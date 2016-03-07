@@ -1,0 +1,85 @@
+//
+   Created by yangdongxu on 15/11/20.
+
+div(ng-init="init()",style="padding:10px 20px;margin-top:20px;")
+    a(ui-sref='mts.jobTemplateList')
+        i.fa.fa-arrow-circle-left
+        | &nbsp;返回列表
+    h1
+        | {{baseInfo.title}}
+    hr
+    div(ng-if="!loaded")
+        span.fa.fa-spin.fa-spinner
+        | &nbsp;加载中...
+    form.kai-form.col-md-7(ng-if="loaded",
+    style="padding-bottom:100px",
+    ng-submit="submitHandler()")
+        // ----- base ------
+        .form-group
+            label
+                b.text-danger *&nbsp;
+                b 名称
+            input.form-control(type="text",
+            ng-required="true", ng-minlength="1", ng-maxlength="64",
+            ng-pattern="/^[\u4e00-\u9fa5_a-zA-Z0-9-\%\.]{0,}$/",
+            ng-model="template.name")
+            span.help-block
+                | 1.只能包含中英文、数字、_-.%
+                br
+                | 2.转码模板名称长度限制在128个字节之内
+        .form-group
+            label
+                b 描述
+            textarea.form-control(ng-model="template.desc")
+
+        .form-group
+            label
+                b Outputs
+            //textarea.form-control(ng-model="template.outputs", ng-required="true")
+            #jsoneditor(ng-init="initJSONEditor()",style="height: 400px;")
+            span.help-block 转码作业输出的配置,以JSON格式编辑
+
+        .form-group
+            label
+                b 转码管道ID
+            select.form-control(ng-required="true",
+            ng-model="template.pipelineId")
+                option(ng-repeat="pl in pipelines", value="{{pl.id}}") {{pl.name}}
+            //input.form-control(type="text",
+            //ng-required="true",
+            //ng-model="template.pipelineId")
+
+        .form-group
+            label
+                b 输出Bucket
+            input.form-control(type="text",
+            ng-required="true",
+            ng-model="template.outputBucket")
+        .form-group
+            label
+                b 输出Location
+            input.form-control(type="text",
+            ng-required="true",
+            ng-model="template.outputLocation")
+
+        .form-group
+            label
+                b 默认应用
+            select.form-control(ng-model="template.using"
+            ng-options="o.v as o.n for o in [{ n: '否', v: false }, { n: '是', v: true }]")
+
+
+        .form-group
+            label
+                b 最后操作人
+            input.form-control(type="text",
+            disabled="disabled",
+            ng-model="template.adminId")
+        .form-group
+            label
+                b 最后更新时间
+            p {{template.lastUpdate * 1000|date:'yyyy-MM-dd HH:mm:ss'}}
+
+        button.btn.btn-lg.btn-success(type="submit")
+            i.fa.fa-check
+            | &nbsp;确定
