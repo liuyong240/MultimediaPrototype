@@ -1,0 +1,18 @@
+{
+  "Version": "1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "oss:DeleteObject",
+        "oss:ListParts",
+        "oss:AbortMultipartUpload",
+        "oss:PutObject"
+      ],
+      "Resource": [
+        "acs:oss:*:*:{bucketName}/{subDir}",
+        "acs:oss:*:*:{bucketName}/{subDir}/*"
+      ]
+    }
+  ]
+}

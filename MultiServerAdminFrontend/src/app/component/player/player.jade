@@ -1,0 +1,27 @@
+//
+   Created by yangdongxu on 15/11/26.
+
+
+//div(ng-controller="AdminPlayerCtrl", ng-init="init()")
+//   script(src="/modules/MediaElement/mediaelement-and-player.min.js")
+//   link(rel="stylesheet", href="/modules/MediaElement/mediaelementplayer.css")
+//
+//   video(id="player1" src="http://multimedia-input.oss-cn-hangzhou.aliyuncs.com/output/prefix-sample-suffix.flv?Expires=1448618776&OSSAccessKeyId=HYmwRNeXFrEMLXYp&Signature=dZBjx6bZhDSVUO9ftvXor5rw%2Bq4%3D" type="video/flv" width="320" height="240",
+//   controls="controls")
+//   br
+//   |Time:
+//   span(id="current-time")
+
+
+//script(src="//g.alicdn.com/de/prismplayer/1.2.16/prism-min.js")
+link(rel="stylesheet", href="//g.alicdn.com/de/prismplayer/1.2.16/skins/default/index-min.css")
+
+div(ng-init="init()")
+    div#J_prismPlayer.prism-player
+
+
+    //form(name="form")
+        div.btn.btn-primary(ngf-select ng-model="file" name="file"
+        accept="video/*"
+        ngf-pattern="'video/*'") select
+        button(type="submit" ng-click="submit()") submit

@@ -1,0 +1,189 @@
+//
+   Created by yangdongxu on 15/11/17.
+
+div(ng-init="init()",style="padding:10px 20px;margin-top:20px;")
+    a(ui-sref='mts.list')
+        i.fa.fa-arrow-circle-left
+        | &nbsp;返回列表
+    h1
+        |{{baseInfo.title}}
+    hr
+    div(ng-if="!loaded")
+        span.fa.fa-spin.fa-spinner
+        |&nbsp;加载中...
+    form.kai-form.col-md-7(ng-if="loaded",
+    style="padding-bottom:100px",
+    ng-submit="submitHandler()")
+        // ----- base ------
+        h2 转码文件设置
+        .form-group
+            label
+                b.text-danger *&nbsp;
+                b 转码模板名称
+            input.form-control(type="text",
+            ng-required="true", ng-minlength="1", ng-maxlength="64",
+            ng-pattern="/^[\u4e00-\u9fa5_a-zA-Z0-9-\%\.]{0,}$/",
+            ng-model="template.name")
+            span.help-block
+                |1.只能包含中英文、数字、_-.%
+                br
+                |2.转码模板名称长度限制在128个字节之内
+        .form-group
+            label
+                b.text-danger *&nbsp;
+                b 文件格式
+            select.form-control(ng-model="template.container.format", ng-required="true")
+                option(ng-repeat="type in formBasic.fileType", value="{{type}}") {{type}}
+
+        // ----- video ------
+        hr
+        h2 视频设置
+        //.form-group
+            label
+                input(type="checkbox", ng-model="template.videoDisabled")
+                |&nbsp;禁用视频
+        .form-group
+            label
+                b 编码格式
+            select.form-control(ng-model="template.video.codec")
+                option(ng-repeat="codec in formBasic.videoCodec(template.container.format)", value="{{codec}}") {{codec}}
+        .form-group(ng-if="template.video.codec === 'H.264'")
+            label
+                b 编码级别
+            select.form-control(ng-model="template.video.profile")
+                option(ng-repeat="p in formBasic.videoProfile", value="{{p}}") {{p}}
+        .form-group
+            label
+                b 码率(Kbps)
+            input.form-control(type="text",
+            text-range, text-min="10", text-max="50000",
+            ng-model="template.video.bitrate",)
+            span.help-block 值范围[10, 50000]
+        .form-group
+            label
+                b 质量控制因子
+            input.form-control(type="text",
+            text-range, text-min="0", text-max="51",
+            ng-model="template.video.crf")
+            span.help-block
+                |值范围[0,51], 默认值26
+                br
+                |如果设置了Crf。则Bitrate的设置失效
+        .form-group
+            label
+                b 视频宽度(px)
+            input.form-control(type="text",
+            text-range, text-min="128", text-max="4096",
+            ng-model="template.video.width")
+            span.help-block 默认值是视频原始宽度，值范围[128,4096]
+        .form-group
+            label
+                b 视频高度(px)
+            input.form-control(type="text",
+            text-range, text-min="128", text-max="4096",
+            ng-model="template.video.height")
+            span.help-block 默认值是视频原始高度，值范围[128,4096]
+        .form-group
+            label
+                b 帧率(fps)
+            input.form-control(type="text",
+            text-range, text-min="0", text-max="60",
+            ng-model="template.video.fps")
+            span.help-block 默认值取输入文件帧率，当输入文件帧率超过60时取60, 值范围(0,60]
+        .form-group
+            label
+                b 关键帧间最大帧数
+            input.form-control(type="text",
+            text-range, text-min="1", text-max="100000",
+            ng-model="template.video.gop")
+            span.help-block 值范围[1,100000]，默认值250
+        .form-group(ng-if="template.video.codec === 'H.264'")
+            label
+                b 视频算法器预置
+            select.form-control(ng-model="template.video.preset")
+                option(ng-repeat="op in formBasic.videoPreset", value="{{op}}") {{op}}
+        .form-group
+            label
+                b 扫描模式
+            select.form-control(ng-model="template.video.scanMode")
+                option(ng-repeat="op in formBasic.videoScanMode", value="{{op}}") {{op}}
+        .form-group
+            label
+                b 缓冲区大小(Kb)
+            input.form-control(type="text",
+            text-range, text-min="1000", text-max="128000",
+            ng-model="template.video.bufsize")
+            span.help-block 值范围[1000,128000]，默认值6000
+        .form-group
+            label
+                b 码率峰值(Kbps)
+            input.form-control(type="text",
+            text-range, text-min="10", text-max="50000",
+            ng-model="template.video.maxrate")
+            span.help-block 值范围[10,50000]
+        .form-group(ng-if="template.video.codec === 'H.264'")
+            label
+                b 视频码率范围 - 上限 (Kbps)
+            input.form-control(type="text",
+            text-range, text-min="10", text-max="50000",
+            ng-model="template.video.bitrateBnd.max")
+            span.help-block [10, 50000]
+        .form-group(ng-if="template.video.codec === 'H.264'")
+            label
+                b 视频码率范围 - 下限 (Kbps)
+            input.form-control(type="text",
+            text-range, text-min="10", text-max="50000",
+            ng-model="template.video.bitrateBnd.min")
+            span.help-block [10, 50000]
+        .form-group
+            label
+                b 视频颜色格式
+            input.form-control(type="text",
+            ng-model="template.video.pixFmt")
+
+        // ----- audio ------
+        hr
+        h2 音频设置
+        //.form-group
+            label
+                input(type="checkbox", ng-model="template.audioDisabled")
+                |&nbsp;禁用音频
+        .form-group
+            label
+                b 编码格式
+            select.form-control(ng-model="template.audio.codec")
+                option(ng-repeat="op in formBasic.audioCodec", value="{{op}}") {{op}}
+        .form-group(ng-if="template.audio.codec === 'AAC'")
+            label
+                b 音频编码预置
+            select.form-control(ng-model="template.audio.profile")
+                option(ng-repeat="op in formBasic.audioProfile", value="{{op}}") {{op}}
+        .form-group
+            label
+                b 采样率(Hz)
+            select.form-control(ng-model="template.audio.samplerate")
+                option(ng-repeat="op in formBasic.audioSamplerate(template.container.format, template.audio.codec)",
+                value="{{op}}") {{op}}
+        .form-group
+            label
+                b 输出码率(Kbps)
+            input.form-control(type="text",
+            text-range, text-min="8", text-max="1000",
+            ng-model="template.audio.bitrate")
+            span.help-block 值范围[8,1000]
+        .form-group
+            label
+                b 声道数
+            select.form-control(ng-model="template.audio.channels")
+                option(ng-repeat="op in formBasic.audioChannels(template.audio.codec)", value="{{op}}") {{op}}
+
+        //--- common ---
+        hr
+        h2 封包参数
+        .form-group
+            label
+                b 分片时长(s)
+            input.form-control(type="text",
+            ng-model="template.muxConfig.segment.duration")
+
+        button.btn.btn-lg.btn-primary(type="submit") 确定

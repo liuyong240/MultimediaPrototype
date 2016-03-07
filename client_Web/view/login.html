@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% block js %}
+	<script data-main="/static/js/pages/login" src="/static/libs/requirejs/require.js"></script>
+{% endblock %}
+
+{% block bodyClass %}login-wrap{% endblock %}
+
+{#无顶部导航#}
+{% block navMain %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                {# 登录界面 (Start) #}
+                <div id="login_info" class="login-box">
+                    <p class="text-center"><img src="/static/images/default-user.png" alt="pic-head" class="img-circle"
+                                                width="100"></p>
+
+                    <form class="" action="/auth/api/login" method="post">
+                        <fieldset>
+                            <div class="form-group has-feedback">
+                                <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </span>
+                                    <input name="username" type="text" class="form-control" id="" placeholder="用户名" value="">
+                                </div>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                </span>
+                                    <input name="password" type="password" class="form-control" id="" placeholder="密码" value="">
+                                </div>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <p class="btn-bar clearfix">
+                                    <button class="btn btn-success pull-left" type="submit">登 录</button>
+                                    <a class="btn btn-default pull-right toogle-dialog" data-type="register" href="#">注
+                                        册</a>
+                                </p>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                {# 登录界面 (End) #}
+
+                {# 注册界面 (Start) #}
+                <div id="register_info" class="login-box" style="display: none">
+                    <form class="" action="/auth/api/signup" method="post">
+                        <fieldset>
+                            <div class="form-group has-feedback">
+                                <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </span>
+                                    <input name="username" type="text" class="form-control" id="" placeholder="用户名" value="">
+                                </div>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                </span>
+                                    <input name="password" type="password" class="form-control" id="password" placeholder="密码" value="">
+                                </div>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                </span>
+                                    <input name="repassword" type="password" class="form-control" placeholder="确认密码" value="">
+                                </div>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <p class="btn-bar clearfix">
+                                    <button class="btn btn-success pull-left" type="submit">注 册</button>
+                                    <a class="btn btn-default pull-right toogle-dialog" data-type="login" href="#">登
+                                        录</a>
+                                </p>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                {# 注册界面 (End) #}
+
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+{% endblock %}

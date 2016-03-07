@@ -1,0 +1,52 @@
+//
+   Created by yangdongxu on 15/11/26.
+
+div(ng-init="init()",style="padding:10px 20px;margin-top:20px;")
+    a(ui-sref='user.list')
+        i.fa.fa-arrow-circle-left
+        | &nbsp;返回列表
+    h1
+        | {{baseInfo.title}}
+    hr
+    div(ng-if="!loaded")
+        span.fa.fa-spin.fa-spinner
+        | &nbsp;加载中...
+    form.kai-form.col-md-7(ng-if="loaded",
+    style="padding-bottom:100px",
+    ng-submit="submitHandler()")
+        // ----- base ------
+        h2 转码文件设置
+        .form-group
+            label
+                b.text-danger *&nbsp;
+                b 用户名
+            input.form-control(type="text",
+            ng-disabled="true",
+            ng-model="template.username")
+        .form-group
+            label
+                b 用户权限
+            .checkbox
+                label
+                    input(type="checkbox", ng-model="template.auth.ROLE_ADMIN")
+                    |ADMIN
+            .checkbox
+                label
+                    input(type="checkbox", ng-model="template.auth.ROLE_USER")
+                    |USER
+        .form-group
+            label
+                b 状态
+            .radio
+                label
+                    input(type="radio", ng-model="template.enabled", ng-value="true")
+                    |正常
+            .radio
+                label
+                    input(type="radio", ng-model="template.enabled", ng-value="false")
+                    |禁用
+
+
+        button.btn.btn-lg.btn-success(type="submit")
+            i.fa.fa-check
+            | &nbsp;确定

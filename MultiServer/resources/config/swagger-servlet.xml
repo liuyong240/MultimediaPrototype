@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <!--指明 controller 所在包，并扫描其中的注解-->
+    <context:component-scan base-package="io.swagger.controller,
+       io.swagger.configuration, io.swagger.model, io.swagger.service"/>
+
+
+
+    <!-- 开启注解 -->
+    <mvc:annotation-driven/>
+    <!-- 静态资源(js、image等)的访问 -->
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger-ui/"/>
+    <mvc:resources mapping="/javadoc_statics/**" location="/WEB-INF/javadoc_statics/"/>
+
+   <bean class="io.swagger.configuration.MySwaggerConfig"/>
+
+</beans>

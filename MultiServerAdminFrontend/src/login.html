@@ -1,0 +1,78 @@
+<!doctype html>
+<html ng-app="admin">
+<head>
+    <meta charset="utf-8">
+    <title>Multimedia</title>
+    <meta name="description" content="流媒体">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+
+<style>
+    * {
+        font-size: 14px;
+    }
+    *:focus {
+        outline: none;
+    }
+    html {
+        background: #00a2ca;
+    }
+    h1 {
+        margin-top: 100px;
+        color: #fff;
+        font-size: 24px;
+        text-align: center;
+    }
+    form {
+        width: 300px;
+        padding: 0px 20px;
+        margin: 0 auto;
+    }
+    .form-row {
+        margin-bottom: 10px;
+    }
+    .form-label {
+        color: #fff;
+        font-size: 12px;
+        display: inline-block;
+        width: 50px;
+        text-align: right;
+        margin-right: 10px;
+    }
+    .form-input {
+        width: 180px;
+        padding: 5px;
+        border: none;
+        color: #fff;
+        background: #008ab0;
+    }
+    .form-submit {
+        cursor: pointer;
+        border: 1px solid #fff;
+        color: #fff;
+        background: none;
+        padding: 10px 20px;
+    }
+</style>
+
+<h1>流媒体Admin系统</h1>
+<form>
+    <div class="form-row">
+        <label class="form-label">用户名</label>
+        <input class="form-input" type="text" name="user" />
+    </div>
+    <div class="form-row">
+        <label class="form-label">密码</label>
+        <input class="form-input" type="password" name="pass" />
+    </div>
+    <div class="form-row">
+        <label class="form-label"></label>
+        <button class="form-submit" type="submit">登录</button>
+    </div>
+</form>
+
+
+</body>
+</html>

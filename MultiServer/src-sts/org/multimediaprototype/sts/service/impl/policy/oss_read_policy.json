@@ -1,0 +1,29 @@
+{
+  "Version": "1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "oss:GetObject"
+      ],
+      "Resource": [
+        "acs:oss:*:*:{bucketName}/{subDir}",
+        "acs:oss:*:*:{bucketName}/{subDir}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "oss:ListObjects"
+      ],
+      "Resource": [
+        "acs:oss:*:*:{bucketName}"
+      ],
+      "Condition": {
+        "StringLike": {
+          "oss:Prefix": "{subDir}/*"
+        }
+      }
+    }
+  ]
+}
