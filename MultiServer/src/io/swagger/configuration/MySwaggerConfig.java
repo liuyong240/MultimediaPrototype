@@ -42,7 +42,7 @@ public class MySwaggerConfig  {
                 "xxxxxx",
                 "1.0",
                 "http://myapp/terms/",
-                "dongxu,
+                "dongxu",
                 "",
                 ""
         );
