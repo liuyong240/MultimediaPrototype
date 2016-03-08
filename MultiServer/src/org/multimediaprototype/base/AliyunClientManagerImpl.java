@@ -32,10 +32,6 @@ public class AliyunClientManagerImpl implements AliyunClientManager {
     @Value("#{propsUtil['aliyunConsole.accesskeySecret']}")
     private String accessKeySecret;
 
-    @Value("#{propsUtil['aliyunConsole.ramAccessId']}")
-    private String ramAccessKeyId;
-    @Value("#{propsUtil['aliyunConsole.ramAccesskeySecret']}")
-    private String ramAccessKeySecret;
 
     // client url
     @Value("#{propsUtil['aliyunConsole.mtsServerUrl']}")
@@ -72,10 +68,6 @@ public class AliyunClientManagerImpl implements AliyunClientManager {
         // init mns client
         CloudAccount cloudAccount = new CloudAccount(accessKeyId, accessKeySecret, mnsEndpointHz);
         mnsClient = cloudAccount.getMNSClient();
-
-        // init sts client
-        IClientProfile profile = DefaultProfile.getProfile(Constants.STS_REGION_HANGZHOU, ramAccessKeyId, ramAccessKeySecret);
-        stsClient = new DefaultAcsClient(profile);
 
         // init ram client
         IClientProfile ramProfile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
