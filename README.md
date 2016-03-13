@@ -24,15 +24,25 @@
 
 ## 服务端代码说明
 src：系统公用模块
+
 src-sts模块：提供安全凭证，用来授予临时的访问权限（服务端接口已经完成，使用案例可以参考src-test/multimedia/sts目录）
+
 src-oss模块：对外提供文件存储相关服务
+
 src-ocs模块：系统缓存服务
+
 src-mns模块：消息通知服务
+
 src-mts模块：对外提供视频转码相关服务
+
 src-admin模块：对外提供水印模板管理用户信息获取服务
+
 src-auth模块：对外提供登录、注册服务
+
 src-test：系统单元测试模块
+
 resources模块：系统配置文档
+
 WebContent模块：后台管理前端模块
 
 ## 服务端安装步骤
