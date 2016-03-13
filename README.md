@@ -31,6 +31,19 @@
 1. 增加基于RAM/STS，通过客户端直传方案 
 2. 增加OCS缓存 
 
+## 代码结构说明
+
+MultiServer：样板间服务端代码
+
+MultiServerAdminFrontend：样板间管理控制台前端代码 
+
+client_Web：样板间web段代码  
+
+client_iOS：样板间IOS客户端代码
+ 
+deploy：部署脚本
+
+docs：样板间说明文档 
 
 ## 服务端代码说明
 src：系统公用模块
