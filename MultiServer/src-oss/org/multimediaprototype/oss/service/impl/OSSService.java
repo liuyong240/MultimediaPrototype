@@ -12,7 +12,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multimediaprototype.base.Constants;
-import org.multimediaprototype.ocs.service.IOSSOCSService;
 import org.multimediaprototype.oss.base.impl.MultiOSSApi;
 import org.multimediaprototype.oss.base.impl.OSSApi;
 import org.multimediaprototype.oss.dao.impl.MediaMap;
@@ -45,9 +44,6 @@ public class OSSService implements IOSSService {
 
     @Autowired
     private MediaMap mediaMap;
-
-    @Autowired
-    private IOSSOCSService ossOCSService;
 
     @Value("#{propsUtil['aliyunConsole.bucket']}")
     private String defaultBucket;
@@ -112,7 +108,7 @@ public class OSSService implements IOSSService {
     @Override
     public List<OSSFile> getUserOssList(Long userId, Integer offset,
                                         Integer rowCount) {
-        return ossOCSService.getUserOssList(userId, offset, rowCount);
+        return ossManage.getOssList(userId, offset, rowCount);
     }
 
     /**
