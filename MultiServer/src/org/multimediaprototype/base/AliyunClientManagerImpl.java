@@ -3,13 +3,8 @@ package org.multimediaprototype.base;
 import com.aliyun.api.AliyunClient;
 import com.aliyun.api.DefaultAliyunClient;
 import com.aliyun.mns.client.CloudAccount;
-import com.aliyun.mns.client.DefaultMNSClient;
 import com.aliyun.mns.client.MNSClient;
 import com.aliyun.oss.OSSClient;
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
-import com.sun.xml.bind.v2.runtime.reflect.opt.Const;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,8 +40,6 @@ public class AliyunClientManagerImpl implements AliyunClientManager {
     private AliyunClient mtsClient;
     private OSSClient ossClient;
     private MNSClient mnsClient;
-    private DefaultAcsClient stsClient;
-    private DefaultAcsClient ramClient;
 
     private static Logger log = LogManager.getLogger(AliyunClientManagerImpl.class);
 
@@ -69,9 +62,6 @@ public class AliyunClientManagerImpl implements AliyunClientManager {
         CloudAccount cloudAccount = new CloudAccount(accessKeyId, accessKeySecret, mnsEndpointHz);
         mnsClient = cloudAccount.getMNSClient();
 
-        // init ram client
-        IClientProfile ramProfile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
-        ramClient = new DefaultAcsClient(ramProfile);
     }
 
     @Override
@@ -88,13 +78,5 @@ public class AliyunClientManagerImpl implements AliyunClientManager {
         return mnsClient;
     }
 
-    @Override
-    public DefaultAcsClient getSTSClient() {
-        return stsClient;
-    }
-
-    public DefaultAcsClient getRamClient() {
-        return ramClient;
-    }
 }
 
