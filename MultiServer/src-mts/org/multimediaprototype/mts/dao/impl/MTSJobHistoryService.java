@@ -64,7 +64,7 @@ public class MTSJobHistoryService implements IMTSJobHistoryService {
     public List<MTSJobHistory> getJobHistoryListByPipelineId(String pipelineId, Integer pageNumber, Integer pageSize) {
         pageNumber = getValidPageNumber(pageNumber);
         pageSize = getValidPageSize(pageSize);
-        Integer start = (pageNumber - 1) * pageSize + 1;
+        Integer start = (pageNumber - 1) * pageSize;
         return mtsJobHistoryMapper.selectByPipelineId(pipelineId, start, pageSize);
     }
 
@@ -72,7 +72,7 @@ public class MTSJobHistoryService implements IMTSJobHistoryService {
     public List<MTSJobHistory> getJobHistoryList(Integer pageNumber, Integer pageSize) {
         pageNumber = getValidPageNumber(pageNumber);
         pageSize = getValidPageSize(pageSize);
-        Integer start = (pageNumber - 1) * pageSize + 1;
+        Integer start = (pageNumber - 1) * pageSize;
         return mtsJobHistoryMapper.selectByOffset(start, pageSize);
     }
 
@@ -80,7 +80,7 @@ public class MTSJobHistoryService implements IMTSJobHistoryService {
     public List<MTSJobHistory> getJobHistoryListByUserId(Long userId, Integer pageNumber, Integer pageSize) {
         pageNumber = getValidPageNumber(pageNumber);
         pageSize = getValidPageSize(pageSize);
-        Integer start = (pageNumber - 1) * pageSize + 1;
+        Integer start = (pageNumber - 1) * pageSize;
         return mtsJobHistoryMapper.selectByUserId(userId, start, pageSize);
     }
 
