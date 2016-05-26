@@ -1,4 +1,4 @@
-多媒体样板间 : 客户端
+多媒体样板间 - PC端
 ===
 
 #概述
@@ -9,91 +9,66 @@
 
 webserver使用Koa搭建，pm2管理服务进程。
 
-#开发环境搭建
 
-## 一、前端部分：
+#本地开发
 
-### 1、安装NVM
+## 一、环境搭建
+### 1 安装
+
+#### 1.1 安装NVM
 
 详见 https://github.com/creationix/nvm
 
-### 2、安装Node.js（ >= v0.12 ）
+#### 1.2 安装Node.js（ v5.3 ）
 
-nvm install v5.3.0
-nvm use 5.3.0
+nvm install v5.3
 
-### 3、安装cnpm
+nvm use 5.3
 
-由于npm资源在墙外，所以最好使用cnpm替换,详见 https://npm.taobao.org/
+#### 1.3 安装NginX
 
-### 4、安装bower
+mac安装 : brew install nginx
 
-    cnpm install -g bower
+其他详见 : http://nginx.org/en/download.html
 
-### 5、安装本地依赖
+### 2 配置
 
-    cnpm install
-    bower install
+#### 2.1 nginx配置
 
-## 二、server部分
+    server {
+    	listen 3000;
+    	server_name 127.0.0.1;
 
-### 2、安装NVM、Node.js ( >= v0.12 )、CNPM
+    	location / {
+    		proxy_set_header X-Real-IP $remote_addr;
+    		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    		proxy_buffering off;
+    		proxy_pass http://127.0.0.1:3100;
+    	}
 
-略（见前端部分）
+    	location ~ /api/oss {
+    		proxy_buffering off;
+    		proxy_pass http://127.0.0.1:8081;
+    	}
 
-### 3、安装NginX
-
-详见 http://nginx.org/en/download.html
-
-### 4、安装Node.js依赖
-
-    cnpm install
-
-### 5、安装pm2
-
-    cnpm install -g pm2
-
-## 三、配置
-
-### koa配置
-
-conf/config.js为server本地服务配置;  
-conf/config.product.js为server线上服务配置
+    }
 
 
-### nginx配置
+## 二 项目启动
 
-用于将3000端口的请求转至3100
-线上作用相同
+### 1 项目启动
 
-## 四、开发环境启动
-
-### 本地 node 工程, 联调线上 java 工程
+    // 启动 "多媒体样板间" java 工程 (保证端口为 8081)
 
     // 启动nginx
     nginx
 
-    // 启动node server
-    pm2 start app_pm2.json
+    // 在客户端目录下(client_Web/),启动server
+    node app.js
 
-### 本地 node 工程, 联调本地 java 工程
+    // 浏览器访问
+    http://127.0.0.1:3000/login
 
-	// 启动nginxg
-        nginx
-
-	// 启动node server
-		NODE_ENV=development node app/app.js
-
-    // 启动 java 工程
-    java 工程地址 : 
-
-## 五、生产环境启动
-
-### 登录信息
-
-
-### 部署步骤
-	cd /home/zhuzhen.bk/project/MultimediaPrototype &&
-	nvm use 5.3 &&
-	pm2 start app_pm2.json
-
+    // 用户名和密码
+    user : admin
+    password : admin

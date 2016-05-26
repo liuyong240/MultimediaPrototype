@@ -21,7 +21,7 @@ var routes = [
 		controller: require('../controller/homeRoutes').showUpload
 	},
 	{
-		path      : '/api/oss/putMultiAndPic',
+		path      : '/api/oss/putMultiAndPicDemo',
 		method    : 'post',
 		controller: require('../controller/homeRoutes').upload
 	},

@@ -3,7 +3,10 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+            http://www.springframework.org/schema/beans
 			http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context.xsd
@@ -11,7 +14,7 @@
             http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
-	<util:properties id="propsUtil" location="classpath:config/env-aliyunConsole.properties"/>
+	<util:properties id="propsUtil" location="classpath:env-aliyunConsole.properties"/>
 
 	<!--      当Spring容器启动完成后执行下面的这个Bean -->
 	<bean class="org.multimediaprototype.util.config.InstantiationTracingBeanPostProcessor"/>
@@ -19,8 +22,11 @@
 	<mvc:annotation-driven/>
 
 
-	<context:component-scan base-package="org.PrototypeCommon.base.redis,
-		org.multimediaprototype"/>
+	<context:component-scan base-package="org.multimediaprototype"/>
+
+	<!-- 启动对@AspectJ注解的支持 	 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
 
 	<bean id="threadPool" class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean">
 		<property name="corePoolSize" value="50"/>

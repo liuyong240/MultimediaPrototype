@@ -6,6 +6,10 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.multimediaprototype.auth.dao.SiteUserMapper;
 import org.multimediaprototype.auth.model.SiteUser;
 import org.multimediaprototype.auth.model.SiteUserDetail;

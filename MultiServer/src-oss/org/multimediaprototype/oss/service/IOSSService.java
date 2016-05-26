@@ -37,4 +37,6 @@ public interface IOSSService {
 
       void updateMediaMapStatus(String url, String state);
 
+      void deleteObjects(String bucketName,String prefix);
+
 }

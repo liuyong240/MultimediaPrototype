@@ -65,7 +65,6 @@
         <param-value>
             classpath:config/front-servlet.xml,
             classpath:config/spring-dao-context.xml,
-            classpath:config/spring-schedule-context.xml,
             classpath:config/swagger-servlet.xml,
             classpath:config/admin-servlet.xml,
             classpath:config/info-servlet.xml,

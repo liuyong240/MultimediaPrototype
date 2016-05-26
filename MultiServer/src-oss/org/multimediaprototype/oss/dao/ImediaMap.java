@@ -9,5 +9,5 @@ public interface ImediaMap {
     MediaMapping getMediaMap(Long id);
     MediaMapping getMediaMapByMediaId(Long mediaId);
     long deleteMudiaMap(long id);
-
+    int deleteMediaByTime();
 }

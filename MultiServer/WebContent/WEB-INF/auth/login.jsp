@@ -33,7 +33,7 @@
         data: data
       }).success(function(data) {
         location.href = "/";
-      }).failure(function() {
+      }).error(function() {
         alert('登录失败!');
       }).always(function() {
         $('.loading').hide();

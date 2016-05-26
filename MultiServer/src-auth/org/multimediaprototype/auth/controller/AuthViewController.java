@@ -1,6 +1,10 @@
 package org.multimediaprototype.auth.controller;
 
+import org.multimediaprototype.auth.service.SiteUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/auth")
 public class AuthViewController {
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView view = new ModelAndView();

@@ -18,8 +18,9 @@
 			 dataType  : 'json',
 			 data      : params.data || {},
 			 success   : fnOk || function(data){console.log(data)},
-			 error     : function () {
-				 console.log('ajax error!')
+			 error     : function (error) {
+				 console.log(error);
+				 infoTip('error-tip','请求失败');
 			 },
 			 beforeSend: function () {
 				 var dom = '<div style="opacity: 0" class="ajax-loading-wrap"><img class="ajax-loading" src="/static/images/loading.gif" /></div>';

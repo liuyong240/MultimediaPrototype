@@ -25,5 +25,5 @@ public interface SiteUserMapper {
             @Param("authorities") String authorities,
             @Param("enabled") Boolean enabled
     );
-
+    
 }

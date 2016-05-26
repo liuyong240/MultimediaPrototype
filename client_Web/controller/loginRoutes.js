@@ -7,70 +7,59 @@ var db = require('../module/db');
 
 var utils = require('../module/utils');
 
-/*
- * 登录页
- * */
+// 登录页
 function *show() {
-	var data = {};
-	this.body = yield render('login', data);
+  var data = {};
+  this.body = yield render('login', data);
 }
 
-/**
- * 登录
- */
+// 登录
 function *login() {
-	var user = yield parse(this);
-	var res = yield utils._request('post', this.url, user);
+  var user = yield parse(this);
+  var res = yield utils._request('post', this.url, user);
 
-	// tofix : node帮忙做兼容处理 -> java端返回规范, 此处 res.body = undefined
-	if (res.status === 200) {
-		res.body = {code: 0, data: null, error: null};
+  /**
+   * 写入后端返回的 JSESSIONID cookie
+   */
+  if (res.status === 200) {
+    res.body = {code: 0, data: null, error: null};
+    this.cookies.set('JSESSIONID', utils.getSessionId(res.headers['set-cookie'][0]));
+    this.session.username = user.username;
+  } else {
+    res.body = {code: res.status, data: null, error: '用户名和密码输入不正确'};
+  }
 
-		// 写入后端返回的 JSESSIONID cookie
-		this.cookies.set('JSESSIONID',utils.getSessionId(res.headers['set-cookie'][0]));
-		this.session.username = user.username;
-
-
-	} else {
-		res.body = {code: res.status, data: null, error: '用户名和密码输入不正确'};
-	}
-
-	this.status = 200;
-	this.body = res.body;
+  this.status = 200;
+  this.body = res.body;
 
 }
 
-/**
- * 登出
- */
+// 登出
 function *logout() {
-	this.cookies.set('JSESSIONID','');
-	this.session = null;
-	this.response.redirect('/');
+  this.cookies.set('JSESSIONID', '');
+  this.session = null;
+  this.response.redirect('/');
 }
 
-/**
- * 注册
- */
+// 注册
 function *register() {
-	var user = yield parse(this);
-	var res = yield utils._request('post', this.url, user);
+  var user = yield parse(this);
+  var res = yield utils._request('post', this.url, user);
 
-	// tofix : node帮忙做兼容处理 -> java端返回规范, 此处 res.body = undefined
-	if (res.status === 200) {
-		res.body = res.body;
-	} else {
-		res.body = {code: res.status, data: null, error: '注册失败'};
-	}
-	//this.session.username = user.username;
-	this.status = 200;
-	this.body = res.body;
+  if (res.status === 200) {
+    res.body = res.body;
+  } else {
+    res.body = {code: res.status, data: null, error: '注册失败'};
+  }
+  this.status = 200;
+  this.body = res.body;
 
 }
 
+// 导出模块
 module.exports = {
-	show    : show,
-	login   : login,
-	logout  : logout,
-	register: register
+  show: show,
+  login: login,
+  logout: logout,
+  register: register
 }

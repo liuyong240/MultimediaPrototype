@@ -1,113 +1,79 @@
 {% extends 'layout.html' %}
 
 {% block js %}
-	<script data-main="/static/js/pages/home" src="/static/libs/requirejs/require.js"></script>
+    <script data-main="/static/js/pages/home" src="/static/libs/requirejs/require.js"></script>
 {% endblock %}
 
 {% block bodyClass %}home-wrap{% endblock %}
 
 {% block content %}
-	<div class="container">
-		<div class="row">
-			<h2>我上传的视频</h2>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row tool-bar">
-					<p class="text-right">
-						<button data-type="view_list" type="button" class="btn btn-info btn-sm">
-							<span class="glyphicon glyphicon-th-list"></span>
-						</button>
-						<button data-type="view_thumb" type="button" class="btn btn-default btn-sm">
-							<span class="glyphicon glyphicon-th-large "></span>
-						</button>
-					</p>
-				</div>
-				<div class="row">
-					<div class="videos">
-						<div class="ul-wrap">
-							<ul class="clearfix">
-								{% for val in data.list %}
-									<li class="row" data-data="{{ val|json }}">
-										<p class="r-p-pic col-md-4">
-											<a href="/video/get/{{ val.id }}"><img class="lazy"
-											                                       data-original="http://{{ domain }}:{{ port }}{{ val.pic_url }}"
-											                                       alt="加载中..." width="100%"/></a>
-											<span class="r-btn r-btn-close">x</span>
-										</p>
+    <div class="ali-container" style="margin-top: 30px">
+        {# 视频列表 #}
+        <div class="videos">
+            <div class="ul-wrap">
+                <ul class="clearfix">
+                    {% for key, val in data.list %}
+                        {% if key == 9  %}
+                            <li style="display: none;"></li>
+                        {% else %}
+                            <li data-data="{{ val|json }}">
+                                <p class="p-pic">
+                                    <a href="/video/get/{{ val.id }}"><img class="lazy"
+                                                                           data-original="http://{{ domain }}:{{ port }}{{ val.pic_url }}"
+                                                                           alt="加载中..." width="224" height="330"/></a>
+                                    <span class="btn-delete" href="#"></span>
+                                </p>
+                                <div class="div-cont">
+                                    <h4><span class="span-title ellipsis">{{ val.title }}</span> <strong>9.3</strong></h4>
+                                    <p class="ellipsis">
+                                        <span>{{ val.username|default('null') }}</span>
+                                        {#<span>上传时间 : <em>{{ val.gmt_created|date('Y-m-d') }}</em></span>#}
+                                    </p>
+                                    {#<p class="ellipsis">{{ val.description }}</p>#}
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="li-upload"><a href="/upload">+</a></li>
+                </ul>
+            </div>
+        </div>
 
-										<div class="r-div-cont col-md-8">
-											<h4>
-												<a href="/video/get/{{ val.id }}"><span>{{ val.title }}</span></a>
-											</h4>
-											<p class="r-p-author">
-												<span>作者 : <em>{{ val.username|default('null') }}</em></span>
-												<span>上传时间 : <em>{{ val.gmt_created|date('Y-m-d') }}</em></span>
+        <nav class="text-center">
+            <ul class="pagination">
+                {% set prev = pageNumber - 1 %}
+                {% set next = parseInt(pageNumber,10) + 1 %}
 
-												{% set status = val.status %}
-												{% if status == 0 %}
-													<strong>待审核</strong>
-												{% elseif status == 1 %}
-													<strong>通过</strong>
-												{% elseif status == 2 %}
-													<strong>不通过</strong>
-												{% elseif status == 3 %}
-													<strong>转码中</strong>
-												{% elseif status == 4 %}
-													<strong>转码失败</strong>
-												{% else %}
-													<strong>待转码</strong>
-												{% endif %}
+                {% if totalPage < 2 or pageNumber == 1 %}
+                    <li class="disabled"><a href="#" aria-label="Previous"><span
+                                    aria-hidden="true">&laquo;</span></a></li>
+                {% else %}
+                    <li><a href="/myvideo?pageNumber={{ prev }}&totalPage={{ totalPage }}"
+                           aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                {% endif %}
 
-											</p>
-											<p class="r-p-des">{{ val.description }}</p>
-										</div>
-									</li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-				</div>
+                {% set totalPageAsArray = Array(totalPage) %}
+                {% for key,val in totalPageAsArray %}
+                    {% set index = key + 1 %}
+                    {% if index == pageNumber %}
+                        <li class="active"><a href="#">{{ index }} <span
+                                        class="sr-only">(current)</span></a></li>
+                    {% else %}
+                        <li class=""><a
+                                    href="/myvideo?pageNumber={{ index }}&totalPage={{ totalPage }}">{{ index }}
+                                <span class="sr-only"></span></a></li>
+                    {% endif %}
+                {% endfor %}
 
-				<div class="row">
-					<nav class="text-center">
-						<ul class="pagination">
-							{% set prev = pageNumber - 1 %}
-							{% set next = parseInt(pageNumber,10) + 1 %}
+                {% if totalPage == pageNumber %}
+                    <li class="disabled"><a href="#" aria-label="Next"><span
+                                    aria-hidden="true">&raquo;</span></a></li>
+                {% else %}
+                    <li><a href="/myvideo?pageNumber={{ next }}&totalPage={{ totalPage }}"
+                           aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </nav>
 
-							{% if totalPage < 2 or pageNumber == 1 %}
-								<li class="disabled"><a href="#" aria-label="Previous"><span
-												aria-hidden="true">&laquo;</span></a></li>
-							{% else %}
-								<li><a href="/myvideo?pageNumber={{ prev }}&totalPage={{ totalPage }}"
-								       aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-							{% endif %}
-
-							{% set totalPageAsArray = Array(totalPage) %}
-							{% for key,val in totalPageAsArray %}
-								{% set index = key + 1 %}
-								{% if index == pageNumber %}
-									<li class="active"><a href="#">{{ index }} <span
-													class="sr-only">(current)</span></a></li>
-								{% else %}
-									<li class=""><a
-												href="/myvideo?pageNumber={{ index }}&totalPage={{ totalPage }}">{{ index }}
-											<span class="sr-only"></span></a></li>
-								{% endif %}
-							{% endfor %}
-
-							{% if totalPage == pageNumber %}
-								<li class="disabled"><a href="#" aria-label="Next"><span
-												aria-hidden="true">&raquo;</span></a></li>
-							{% else %}
-								<li><a href="/myvideo?pageNumber={{ next }}&totalPage={{ totalPage }}"
-								       aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
-							{% endif %}
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-
-	</div>
+    </div>
 {% endblock %}

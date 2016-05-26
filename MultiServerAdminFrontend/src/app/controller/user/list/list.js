@@ -52,13 +52,15 @@ angular.module('admin')
                             inherit: true
                         });
                     }
-                }, {
-                    className: 'text-danger',
-                    icon: 'fa fa-trash',
-                    title: 'Del',
-                    action: function(row) {
-                    }
-                }]
+                }
+                //    , {
+                //    className: 'text-danger',
+                //    icon: 'fa fa-trash',
+                //    title: 'Del',
+                //    action: function(row) {
+                //    }
+                //}
+                ]
             };
             $scope.rows = [];
             $ajax.get('/admin/api/user').done(function(d) {

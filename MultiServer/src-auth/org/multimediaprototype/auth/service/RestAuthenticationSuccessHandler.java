@@ -39,10 +39,11 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
         }
 
         clearAuthenticationAttributes(request);
-
     }
 
     public void setRequestCache(final RequestCache requestCache) {
         this.requestCache = requestCache;
     }
+
 }
+

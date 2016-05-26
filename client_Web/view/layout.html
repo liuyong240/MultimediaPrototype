@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}多媒体样板间{% endblock %}</title>
     {% block css %}
-		<link rel="stylesheet" href="/static/css/common/lib.css">
+        <link rel="stylesheet" href="/static/css/common/lib.css">
         <link rel="stylesheet" href="/static/css/pages/page.css">
     {% endblock %}
     {% block js %}
@@ -16,42 +16,41 @@
 
 {% block navMain %}
     {# 顶部导航 #}
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">
-                    <img alt="多媒体样板间" src="">
-                </a>
+    <nav class="ali-navbar">
+        <div class="ali-navbar-in clearfix">
+            <a class="ali-navbar-brand" href="/">
+                <img alt="多媒体样板间" src="/static/images/bg_logo_112x27.png">
+            </a>
+            <div class="ali-navbar-links">
+                <a class="active" href="/">视频点播</a>
+                <a href="#">视频直播</a>
+                <a href="#">垂直社交</a>
+                <a href="#">会议发展</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    {% if session.username %}
-                        <li>
-                            <a href="#" class="dropdown-toggle" type="button" data-toggle="dropdown"
-                               aria-expanded="false">{{ session.username }}</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="/myvideo">我上传的视频</a>
-                                </li>
-                                <li>
-                                    <a href="/logout">退出</a>
-                                </li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li><a href="/login">登录</a></li>
-                    {% endif %}
-                    <li><a id="btn_upload" class="btn btn-sm btn-info r-btn-upload" href="/upload">上 传</a></li>
-                </ul>
-            </div>
+            <ul class="nav navbar-nav navbar-right">
+                {% if session.username %}
+                    <li>
+                        <a href="#" class="dropdown-toggle" type="button" data-toggle="dropdown"
+                           aria-expanded="false">
+                            {#{{ session.username }}#}
+                            <img class="pic-head" src="/static/images/temp/pic_head_30x30.png" alt="">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            {#<li>#}
+                                {#<a href="/myvideo">我上传的视频</a>#}
+                            {#</li>#}
+                            <li>
+                                <a href="/logout">退出</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a class="a-link" href="/login">登录</a></li>
+                {% endif %}
+            </ul>
         </div>
+
     </nav>
 {% endblock %}
 
@@ -60,7 +59,53 @@
 {% endblock %}
 
 {% block footer %}
-    <footer></footer>
+    <footer>
+        <nav>
+            <p class="big">
+                <a href="//www.aliyun.com/about?spm=5176.7960203.25.1.C4Pc51" target="_blank">关于我们</a>
+                <a href="//www.aliyun.com/about/law?spm=5176.7960203.25.2.C4Pc51" target="_blank">法律声明</a>
+                <a href="http://jubao.alibaba.com/internet/readme.htm?spm=5176.7960203.25.3.C4Pc51"
+                   target="_blank">廉正举报</a>
+                <a href="//www.aliyun.com/links?spm=5176.7960203.25.4.C4Pc51" target="_blank">友情链接</a>
+            </p>
+            <p class="link-wrap">
+                <a class="link-item" href="http://www.alibabagroup.com/cn/global/home" target="_blank">阿里巴巴集团</a>
+                <a class="link-item" href="//www.taobao.com/" target="_blank">淘宝网</a>
+                <a class="link-item" href="//www.tmall.com/" target="_blank">天猫</a>
+                <a class="link-item" href="//ju.taobao.com/" target="_blank">聚划算</a>
+                <a class="link-item" href="http://www.aliexpress.com/" target="_blank">全球速卖通</a>
+                <a class="link-item" href="http://www.alibaba.com/" target="_blank">阿里巴巴国际交易市场</a>
+                <a class="link-item" href="http://www.1688.com/" target="_blank">1688</a>
+                <a class="link-item" href="http://www.alimama.com/index.htm" target="_blank">阿里妈妈</a>
+                <a class="link-item" href="//www.alitrip.com/" target="_blank">阿里旅行・去啊</a>
+                <a class="link-item" href="http://www.aliyun.com/" target="_blank">阿里云计算</a>
+                <a class="link-item" href="http://www.yunos.com/" target="_blank">YunOS</a>
+                <a class="link-item" href="//aliqin.tmall.com/" target="_blank">阿里通信</a>
+                <a class="link-item" href="http://wanwang.aliyun.com/" target="_blank">万网</a>
+                <a class="link-item" href="http://www.autonavi.com/" target="_blank">高德</a>
+                <a class="link-item" href="http://www.uc.cn/" target="_blank">UC</a>
+                <a class="link-item" href="http://www.umeng.com/" target="_blank">友盟</a>
+                <a class="link-item" href="http://www.xiami.com/" target="_blank">虾米</a>
+                <a class="link-item" href="http://www.ttpod.com/" target="_blank">天天动听</a>
+                <a class="link-item" href="http://www.laiwang.com/" target="_blank">来往</a>
+                <a class="link-item" href="http://www.dingtalk.com/?lwfrom=20150205111943449" target="_blank">钉钉</a>
+                <a class="link-item" href="https://www.alipay.com/" target="_blank">支付宝</a>
+            </p>
+            <p class="copyright">
+                <span>© 2009-2016 Aliyun.com 版权所有 ICP证：浙B2-20080101</span>
+                <a href="http://idinfo.zjaic.gov.cn/bscx.do?method=hddoc&amp;id=33010800001867" target="_blank"
+                   data-spm-click="gostr=/aliyun;locaid=d3338" data-spm-anchor-id="5176.7960203.25.26">
+                    <img src="//gtms02.alicdn.com/tps/i2/TB1dG7pJXXXXXXCXVXXiC47GVXX-44-44.png"
+                         style="display:inline-block;width: 22px;">
+                </a>
+                <a href="http://www.aliyun.com/djcp?spm=5176.7960203.25.27.C4Pc51" target="_blank"
+                   data-spm-anchor-id="5176.7960203.25.27">
+                    <img src="//gtms03.alicdn.com/tps/i3/TB18_.kJXXXXXcOXVXXiC47GVXX-44-44.png"
+                         style="display:inline-block;width: 22px;">
+                </a>
+            </p>
+        </nav>
+    </footer>
 {% endblock %}
 
 {% block jsPages %}

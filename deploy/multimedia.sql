@@ -1,25 +1,35 @@
-/*
-SQLyog 企业版 - MySQL GUI v8.14 
-MySQL - 5.6.16 : Database - multimediaprototype
-*********************************************************************
-*/
+-- MySQL dump 10.13  Distrib 5.7.12, for osx10.11 (x86_64)
+--
+-- ------------------------------------------------------
+-- Server version	5.6.29
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
-/*!40101 SET SQL_MODE=''*/;
-
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`multimediaprototype` /*!40100 DEFAULT CHARACTER SET utf8 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
 
-USE `multimediaprototype`;
+--
+-- GTID state at the beginning of the backup 
+--
 
-/*Table structure for table `mediamapping` */
+SET @@GLOBAL.GTID_PURGED='94a50e1b-de67-11e4-b274-d89d672b341c:1-384472858,
+9a740ae2-de67-11e4-b274-d89d672b35c4:1-172397388';
+
+--
+-- Table structure for table `mediamapping`
+--
 
 DROP TABLE IF EXISTS `mediamapping`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mediamapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `media_id` bigint(20) DEFAULT NULL COMMENT '源视频id',
@@ -32,12 +42,16 @@ CREATE TABLE `mediamapping` (
   `father` bigint(20) DEFAULT '0' COMMENT '父节点id，0表示是源文件',
   `gmt_modified` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21393 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Table structure for table `mts_job_history` */
+--
+-- Table structure for table `mts_job_history`
+--
 
 DROP TABLE IF EXISTS `mts_job_history`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mts_job_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `job_id` varchar(32) DEFAULT NULL COMMENT 'mts作业id',
@@ -56,12 +70,16 @@ CREATE TABLE `mts_job_history` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户id',
   `oss_file_id` bigint(20) DEFAULT NULL COMMENT 'OSS文件ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=679 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=712 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Table structure for table `mts_job_template` */
+--
+-- Table structure for table `mts_job_template`
+--
 
 DROP TABLE IF EXISTS `mts_job_template`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mts_job_template` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) DEFAULT NULL,
@@ -74,12 +92,16 @@ CREATE TABLE `mts_job_template` (
   `outputBucket` varchar(60) DEFAULT NULL,
   `outputLocation` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Table structure for table `oss_file` */
+--
+-- Table structure for table `oss_file`
+--
 
 DROP TABLE IF EXISTS `oss_file`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `oss_file` (
   `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `userid` bigint(10) NOT NULL COMMENT '用户id',
@@ -92,25 +114,41 @@ CREATE TABLE `oss_file` (
   `bucket_name` varchar(255) DEFAULT NULL COMMENT 'oss的bucket名',
   `location` varchar(20) DEFAULT NULL COMMENT 'oss bucket的location',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=648 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42735 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Table structure for table `site_user` */
+--
+-- Table structure for table `site_user`
+--
 
 DROP TABLE IF EXISTS `site_user`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `site_user` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(60) NOT NULL DEFAULT '',
   `password` varchar(64) NOT NULL DEFAULT '',
   `authorities` varchar(64) NOT NULL DEFAULT '',
   `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `gmt_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
 
 insert into `site_user` (`id`, `username`, `password`, `authorities`, `enabled`) values('1','admin','$2a$10$OrpLq15eTfeLbPQQJF.K2e4p3VuymG3L6R//k2mxPrWfphk8/iVkq','ROLE_USER,ROLE_ADMIN','1');
 insert into `site_user` (`id`, `username`, `password`, `authorities`, `enabled`) values('7','test','$2a$10$/Wg14ibHKr09jDGSLDnltOibRWkHH/p9o00WCXSV88vA4gQtaOjXi','ROLE_USER','1');
+
+
+-- Dump completed on 2016-05-26 16:02:58

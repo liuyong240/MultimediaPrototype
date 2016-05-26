@@ -17,10 +17,10 @@ var env = process.env.NODE_ENV;
 // 异常处理中间件  -> development
 onerror(app);
 // 生产环境 config
-if (env === 'development') {
-	app.use(serve(__dirname + '/public'))
+if (env === 'product') {
+	app.use(serve(__dirname + '/dist'));
 } else {
-	app.use(serve(__dirname + '/dist'))
+	app.use(serve(__dirname + '/public'));
 }
 app.keys = ['multimediaPrototype'];
 app.use(session(app));

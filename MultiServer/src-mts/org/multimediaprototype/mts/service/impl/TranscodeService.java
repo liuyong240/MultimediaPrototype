@@ -192,10 +192,10 @@ public class TranscodeService implements ITranscodeService {
     }
 
     /**
-     * 获取已提交的转码作业Id列表
+     * 提交转码任务
      *
      * @param userId        用户Id
-     * @param inputObj      输入的Input对象
+     * @param inputObj      输入的oss object
      * @param inputBucket   输入的Bucket信息
      * @param inputLocation 输入的Location
      * @return 已成功提交的转码作业任务JobId列表
@@ -234,8 +234,11 @@ public class TranscodeService implements ITranscodeService {
                 if (response.isSuccess()) {
                     List<JobResult> jobResultList = response.getJobResultList();
                     for (JobResult jobResult : jobResultList) {
+                        // 更新job history
                         MTSJobHistory mtsJobHistory = formatJobHistoryFromJobResult(inputUrl, jobResult, userId);
                         mtsJobHistoryService.insert(mtsJobHistory);
+
+                        // 将jobId 存储到MNS queue
                         String jobId = jobResult.getJob().getJobId();
                         jobIds.add(jobId);
                         mnsService.sendMessage(jobId); // 将jobId信息插入MNS服务提供的默认消息队列中
@@ -253,11 +256,13 @@ public class TranscodeService implements ITranscodeService {
 
 
     /**
-     * 提交转码任务，并将转码任务和截图、描述等视频信息关联
-     * @param userId
-     * @param mediaFile
-     * @param picFile
-     * @param desc
+     * 提交转码任务，并将转码任务和截图、描述等视频信息关联*
+     * @param userId 用户id
+     * @param fatherMapId 父id (用于将源文件和转码后文件进行关联)
+     * @param mediaFile 视频文件
+     * @param picFile 截图文件
+     * @param desc 描述信息
+     * @param title 标题
      * @return
      */
     @Override
@@ -285,13 +290,17 @@ public class TranscodeService implements ITranscodeService {
                     List<JobResult> jobResultList = response.getJobResultList();
                     for (JobResult jobResult : jobResultList) {
                         MTSJobHistory mtsJobHistory = formatJobHistoryFromJobResult(inputUrl, jobResult, userId);
+
+                        // 更新job history 记录
                         mtsJobHistoryService.insert(mtsJobHistory);
 
-                        // 输出文件插入到oss_file表V，并关联到mediamapping表
+                        // 输出文件插入到oss_file表
                         String outputUrl = mtsJobHistory.getOutputUrl();
                         Map<String, String> outputParsed = ossService.parseOSSUrl(outputUrl);
                         String objectKey = outputParsed.get("object");
                         OSSFile outputFile = ossService.upUserMeg(objectKey, userId);
+
+                        // 更新media map 表
                         ossService.addMediaMap(outputFile.getId(), picFileId, desc, title, fatherMapId, Constants.MEDIA_STATUS_TRANSDING);
 
                         // 将jobId存储到mns queue

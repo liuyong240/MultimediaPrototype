@@ -49,4 +49,5 @@ public class OSSManage implements IOSSManage {
         return ossFileMapper.getByUrl(url);
     }
 
+
 }

@@ -22,7 +22,7 @@ import com.aliyun.oss.model.InitiateMultipartUploadRequest;
 import com.aliyun.oss.model.InitiateMultipartUploadResult;
 import com.aliyun.oss.model.PartETag;
 
-@Service("MultiOSSApi")
+@Service("multiOSSApi")
 public class MultiOSSApi implements IMultiOSSApi {
 
     @Autowired

@@ -27,11 +27,11 @@ public class Constants {
 
     public static final String MTS_PIPELINE_STATUS_ACTIVE = "Active";
     public static final String MTS_PIPELINE_STATUS_PAUSED = "Paused";
-    public static final Integer MEDIA_STATUS_CHECK_PENDING = 0; // 待审核（源文件，不需要转码或者已经转码成功）
+    public static final Integer MEDIA_STATUS_CHECK_PENDING = 0; // 待审核（不需要转码的源文件, 或者已经转码成功的转码后文件）
     public static final Integer MEDIA_STATUS_CHECK_SUCCESS = 1; // 审核通过
     public static final Integer MEDIA_STATUS_CHECK_FAILED = 2; // 审核失败
     public static final Integer MEDIA_STATUS_TRANSDING = 3; // 转码中
     public static final Integer MEDIA_STATUS_TRANSCODE_FAILED = 4; // 转码失败
-    public static final Integer MEDIA_STATUS_TRANSCODE_PENDING = 5; // 源文件，需要转码
+    public static final Integer MEDIA_STATUS_TRANSCODE_PENDING = 5; // 需要转码的源文件
 }
 

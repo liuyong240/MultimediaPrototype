@@ -24,7 +24,7 @@
 <script>
     var user = '${user}';
 </script>
-<div kai-navbar></div>
+<div admin-navbar></div>
 <!--div ng-view></div-->
 <div ui-view></div>
 

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <title>多媒体样板间</title>
-    <link rel="stylesheet" href="javadoc_statics/github-markdown-css.css"/>
+    <link rel="stylesheet" href="javadoc/github-markdown-css.css"/>
 </head>
 
 
@@ -18,7 +18,7 @@
     <BR> 在强绑定阿里云各云产品的基础上，打通音视频行业用户基本的产品流程，以开源的方式提供从客户端到服务端的整体解决方案。
     <h1>多媒体样板间1.0</h1> 通过OSS上传文件包括通过应用服务器透传和通过客户端直传两种方案，1.0版本采取的是第一种，通过应用服务器把文件上传到OSS的private bucket。
     <BR>
-    <h2>功能</h2> 1. 客户端(Web/IOS)音视频上传、列表查看、视频播放
+    <h2>功能</h2> 1. Web客户端音视频上传、列表查看、视频播放
     <BR> 2. 服务端音视频上传及转码服务
     <BR> 3. 服务端后台管理
     <BR>
@@ -26,8 +26,8 @@
     <BR> 1. <a href="/info/deploy_index_simple.html">架构图</a>
     <BR> 2. <a href="/info/deploy_index.html">数据流程图</a>
     <BR> 3. <a href="/info/code_index.html">代码结构图</a>
-    <BR> 3. <a href="/swagger/index.html">api文档</a>
-    <BR> 5. <a href="/info/docs/how-to-use.docx">项目使用文档</a>
+    <BR> 4. <a href="/swagger/index.html">api使用文档</a>
+    <BR> 5. <a href="/javadoc/apidocs/index.html">javadoc</a>
         <BR>
     <h2><a href="http://127.0.0.1:3000">PC客户端</a></h2>
     <h2><a href="/admin">管理后台</a></h2>

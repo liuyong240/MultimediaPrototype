@@ -78,5 +78,7 @@ public interface MediaMappingMapper {
             @Param("status") Integer status,
             @Param("statusExclude") Integer statusExclude,
             @Param("userid") Long userid);
+    
+    int deleteByTime();
 
 }

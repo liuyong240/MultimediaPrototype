@@ -112,7 +112,8 @@ public class FileProxyService {
             responseHeaders.set("Content-Type", metadata.getContentType());
             responseHeaders.setConnection(rawMetaData.get("Connection").toString());
             responseHeaders.set("Accept-Ranges", rawMetaData.get("Accept-Ranges").toString());
-            responseHeaders.set("Content-Disposition", rawMetaData.get("Content-Disposition").toString());
+            if(rawMetaData.get("Content-Disposition")!=null)
+            	responseHeaders.set("Content-Disposition", rawMetaData.get("Content-Disposition").toString());
             //todo: encoding报错？？？
 //            responseHeaders.set("Content-Encoding", rawMetaData.get("Content-Encoding").toString());
             responseHeaders.setContentLength(metadata.getContentLength());

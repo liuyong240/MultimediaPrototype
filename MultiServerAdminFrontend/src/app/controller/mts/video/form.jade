@@ -42,11 +42,14 @@ style="padding:10px 20px;margin-top:20px; width: 440px")
             option(value="false") 否
             option(value="true") 是
 
+        //button.btn.btn-lg.btn-primary(type="submit", style="margin-top:20px") 保存
+
+        // 暂时隐藏 20160426 @竹真
         button.btn.btn-lg.btn-primary(type="submit",
         style="margin-top:20px",
         ng-click="save($event)") 保存
-        //(通过代理服务上传到OSS)
 
+        //(通过代理服务上传到OSS)
         //button.btn.btn-lg.btn-primary(type="submit",
         //style="margin-top:20px",
         //ng-click="save2oss($event)") 保存 (直接上传到OSS)

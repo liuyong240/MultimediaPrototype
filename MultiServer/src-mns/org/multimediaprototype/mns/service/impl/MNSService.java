@@ -542,17 +542,6 @@ public class MNSService implements IMNSService {
 
             int msgCounts = (int)(inactiveMsgs + activeMesgs);
             List<Message> msgList = cloudQueue.batchPeekMessage(msgCounts);
-//            List<Message> msgList = cloudQueue.batchPopMessage(msgCounts);
-//            for(Message msg: msgList) {
-//                String recepitHandle = msg.getReceiptHandle();
-//                cloudQueue.changeMessageVisibilityTimeout(recepitHandle, 1); //将取出的消息状态立即改回Active
-//                cloudQueue.changeMessageVisibilityTimeout(recepitHandle, 10);
-//            }
-
-//            for(Message message: msgList) {
-//                System.out.println(message.toString());
-//            }
-
             return msgList;
 
         } catch (ServiceException e) {

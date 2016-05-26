@@ -13,6 +13,7 @@ import org.multimediaprototype.auth.service.SiteUserService;
 import org.multimediaprototype.base.Constants;
 import org.multimediaprototype.common.model.ResponseObject;
 import org.multimediaprototype.mts.service.impl.TranscodeService;
+import org.multimediaprototype.oss.base.IOSSAPi;
 import org.multimediaprototype.oss.dao.impl.OSSManage;
 import org.multimediaprototype.oss.dao.model.MediaMapping;
 import org.multimediaprototype.oss.dao.model.OSSFile;
@@ -69,6 +70,7 @@ public class OSSController {
         res.setData(ossFile);
         return res;
     }
+     
 
     /**
      * 上传文件
@@ -188,4 +190,5 @@ public class OSSController {
         res.setData(i);
         return res;
     }
+
 }

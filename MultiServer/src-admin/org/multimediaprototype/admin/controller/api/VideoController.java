@@ -56,7 +56,7 @@ public class VideoController {
     private TranscodeService transcodeService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @ApiOperation("获取视频列表")
+    @ApiOperation("获取所有视频列表")
     public ResponseObject videoList(
             @RequestParam(defaultValue = "1", required = false)
             Integer pageNumber,
@@ -84,7 +84,7 @@ public class VideoController {
     {
 
         ResponseObject res = new ResponseObject();
-        Map map = videoService.getVideoList(pageNumber, pageSize, null, 5, 1);
+        Map map = videoService.getVideoList(pageNumber, pageSize, null, Constants.MEDIA_STATUS_TRANSCODE_PENDING, 1);
         res.setData(map);
         return res;
     }
@@ -177,18 +177,19 @@ public class VideoController {
         }
 
         if (id == null) {
-            // 设置初始状态
+            // id不存在, add, 设置初始状态
             Integer initStatus = isTranscode ? Constants.MEDIA_STATUS_TRANSCODE_PENDING : Constants.MEDIA_STATUS_CHECK_PENDING;
             MediaMapping mediaMapping = ossService.addMediaMap(mediaId, picId, desc, title, 0L, initStatus);
             id = mediaMapping.getId();
             res.setData(mediaMapping);
         } else {
-            // 直接更新状态
+            // id已经存在, update, 直接更新状态
             MediaMapping mediaMapping = ossService.updateMediaMap(id, mediaId, picId, desc, isDelete, status, title);
             res.setData(mediaMapping);
         }
 
         if (isTranscode && mediaOSSFile != null && picOSSFile != null) {
+            // 需要转码, 且文件不为空, 则触发转码
             List<String> jobIds = transcodeService.submitTranscodeJobs(userId, id, mediaOSSFile, picOSSFile, desc, title);
             if (jobIds == null) {
                 res.setCode(1);

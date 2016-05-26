@@ -59,9 +59,7 @@ function _request(type, url, data){
 			superagent
 				.get(_url)
 				.end(function(err, res){
-					// tofix : 此处添加异常处理
 					if (err) {
-						// tofix : 此处添加异常处理
 						callback(null, res);
 					} else {
 						callback(err, res)
@@ -74,7 +72,6 @@ function _request(type, url, data){
 				.type('form')
 				.end(function(err, res){
 					if (err) {
-						// tofix : 此处添加异常处理
 						callback(null, res);
 					} else {
 						callback(err, res)

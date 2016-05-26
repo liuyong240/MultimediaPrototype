@@ -13,7 +13,7 @@
 
     <!--指明 controller 所在包，并扫描其中的注解-->
     <context:component-scan base-package="io.swagger.controller,
-       io.swagger.configuration, io.swagger.model, io.swagger.service"/>
+       io.swagger.configuration, io.swagger.model"/>
 
 
 
@@ -22,7 +22,7 @@
     <!-- 静态资源(js、image等)的访问 -->
     <mvc:default-servlet-handler/>
     <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger-ui/"/>
-    <mvc:resources mapping="/javadoc_statics/**" location="/WEB-INF/javadoc_statics/"/>
+    <mvc:resources mapping="/javadoc/**" location="/WEB-INF/javadoc_statics/"/>
 
    <bean class="io.swagger.configuration.MySwaggerConfig"/>
 

@@ -14,9 +14,10 @@
                         |&nbsp;{{item.title}}
 
             ul.nav.navbar-nav.navbar-right
-                li.nav-user
-                    |{{username}}
+                li.nav-user.dropdown
+                    a.dropdown-toggle(href="", ng-class="{dropactive : isShow}", ng-click="showMenu()"){{username}}
+                        span.caret
+                    ul.dropdown-menu(ng-show="isShow", style="display:block")
+                        li
+                            a(href="/auth/logout") 退出
                     //| Current date: {{ date | date:'yyyy-MM-dd' }}
-
-
-

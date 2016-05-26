@@ -148,8 +148,8 @@ public class OSSApi implements IOSSAPi {
         File file = new File("D:\\a.jpg");
 
         OSSClient ossClient = new OSSClient(
-                "http://oss-cn-beijing.aliyuncs.com", "HYmwRNeXFrEMLXYp",
-                "Aqw38Fzux52inAbDZbmyIfPMz8HZnx");
+                "http://oss-cn-beijing.aliyuncs.com", "",
+                "");
         PutObjectResult result = ossClient.putObject("yx-get", "123", file);
         File fileNew = new File("D:\\b.jpg");
 
@@ -166,5 +166,24 @@ public class OSSApi implements IOSSAPi {
         // TODO Auto-generated method stub
         return ossClient.listBuckets();
     }
+
+    @Override
+    public void copyObject(String sourceBucketName, String sourceKey,String destinationBucketName,String destinationKey) {
+        // TODO Auto-generated method stub
+        ossClient.copyObject(sourceBucketName, sourceKey, destinationBucketName, destinationKey);
+    }
+
+    @Override
+    public void deleteObjects(String bucketName, String prefix) {
+        // TODO Auto-generated method stub
+        ObjectListing ObjectListing = ossClient.listObjects(bucketName, prefix);
+        List<OSSObjectSummary> listDeletes = ObjectListing.getObjectSummaries();
+        for (int i = 0; i < listDeletes.size(); i++) {
+            String objectName = listDeletes.get(i).getKey();
+            // 如果不为空，先删除bucket下的文件
+            ossClient.deleteObject(bucketName, objectName);
+        }        
+    }
+    
 
 }

@@ -8,7 +8,7 @@ angular.module('admin')
         return {
             restrict: 'A',
             scope: {
-                list: '=list'
+                //list: '=list'
             },
             templateUrl: 'app/component/AdminNav/AdminNav.html',
             controller: 'admin.AdminNavCtrl'

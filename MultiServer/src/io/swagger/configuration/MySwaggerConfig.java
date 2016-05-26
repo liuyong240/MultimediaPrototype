@@ -77,8 +77,26 @@ public class MySwaggerConfig  {
 
     }
 
+    @Bean
+    public Docket authDocket(){
+        ApiInfo apiInfo = new ApiInfo(
+                "多媒体Auth系统API",
+                "后台管理",
+                "1.0",
+                "http://myapp/terms/",
+                "dongxu",
+                "",
+                ""
+        );
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("auth")
+                .apiInfo(apiInfo)
+                .genericModelSubstitutes(ResponseEntity.class)
+                .select()
+                .paths(regex("/auth/.*"))
+                .build();
 
-
+    }
 }
 
 

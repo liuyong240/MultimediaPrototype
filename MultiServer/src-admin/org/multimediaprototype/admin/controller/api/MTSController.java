@@ -5,7 +5,6 @@ import com.aliyun.api.domain.Template;
 import com.aliyun.api.domain.WaterMarkTemplate;
 import com.aliyun.api.mts.mts20140618.response.DeleteTemplateResponse;
 import com.aliyun.api.mts.mts20140618.response.DeleteWaterMarkTemplateResponse;
-import com.aliyun.oss.OSSClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -13,15 +12,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multimediaprototype.admin.model.MTSJobTemplate;
 import org.multimediaprototype.admin.service.MTSService;
-import org.multimediaprototype.auth.service.SiteUserService;
-import org.multimediaprototype.base.AliyunClientManager;
 import org.multimediaprototype.common.model.ResponseObject;
-import org.multimediaprototype.mts.service.impl.TranscodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +27,7 @@ import java.util.Map;
  */
 
 /**
- * <h1>MTS RESTful接口</h1>
+ * <h1>MTS 模板管理 RESTful接口</h1>
  * <p>用于后台管理的前端页面调用</p>
  * <p>详细使用可查看RESTful文档: <a>http://127.0.0.1:8080/swagger/index.html</a></p>
  */
@@ -49,26 +44,8 @@ public class MTSController {
     @Autowired
     private MTSService mtsService;
 
-    @Autowired
-    private AliyunClientManager aliyunClientManager;
-
-    private OSSClient client;
-
-    @PostConstruct
-    public void setupClient() {
-        client = aliyunClientManager.getOssClient();
-    }
-
-    @Autowired
-    private TranscodeService transcodeService;
-
-    @Autowired
-    private SiteUserService siteUserService;
-
-
     @RequestMapping(value = "/jt/test", method = RequestMethod.GET)
-    //public ResponseObject triggerTranscodeTest() {
-    //public OSSObject triggerTranscodeTest() {
+
     public ResponseEntity triggerTranscodeTest() {
 
         String url = "http://multimedia-input.oss-cn-hangzhou.aliyuncs.com/output/prefix-1449543005321568-suffix.flv";

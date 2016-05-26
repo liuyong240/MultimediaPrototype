@@ -17,5 +17,8 @@ public interface IOSSAPi {
     String uploadFile(String bucketName, String key, MultipartFile multFile);
     void downloadFile(String bucketName, String key, String filename);
     void deleteObject(String bucketName,String key);
+    void copyObject(String sourceBucketName, String sourceKey,String destinationBucketName,String destinationKey);
+
+    void deleteObjects(String bucketName,String prefix);
 
 }

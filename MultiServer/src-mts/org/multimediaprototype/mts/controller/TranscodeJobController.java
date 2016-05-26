@@ -32,11 +32,11 @@ public class TranscodeJobController {
     @ApiOperation("提交转码任务")
     public ResponseObject submitTranscodeJob(
             @ApiParam("用户id")
-            @RequestParam(required = true)
+            @RequestParam()
             Long userId,
 
             @ApiParam("输入OSS文件名")
-            @RequestParam(required = true)
+            @RequestParam()
             String inputObj,
 
             @ApiParam("输入OSS bucket")
@@ -58,7 +58,7 @@ public class TranscodeJobController {
     @ApiOperation("取消转码任务")
     public ResponseObject cancelTranscodeJob(
             @ApiParam("jobId")
-            @RequestParam(required = true)
+            @RequestParam()
             String jobId)
     {
         boolean flag = transcodeService.cancelTranscodeJob(jobId);

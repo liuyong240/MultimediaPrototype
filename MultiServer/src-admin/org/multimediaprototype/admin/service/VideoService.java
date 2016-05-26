@@ -11,16 +11,10 @@ import org.multimediaprototype.oss.dao.model.MediaMapping;
 import org.multimediaprototype.oss.dao.model.OSSFile;
 import org.multimediaprototype.service.FileProxyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by dx.yang on 15/12/1.
@@ -43,19 +37,23 @@ public class VideoService {
     @Autowired
     private SiteUserService siteUserService;
 
-
+    /**
+     *
+     * @param pageNumber 页数, 从1开始
+     * @param pageSize  页面大小
+     * @param status 状态
+     * @param statusExclude 排除字段
+     * @param self 1:获取当前用户的视频列表, 0:获取所有用户的视频列表
+     * @return
+     */
     public Map getVideoList(Integer pageNumber, Integer pageSize, Integer status, Integer statusExclude, Integer self) {
 
         Map<String, Object> res = new HashMap<>();
-
-        // 获取当前用户
-        SiteUserDetail user = siteUserService.getCurrentUser();
-
-        // 如果self为false， 则获取全部视频列表
-        // 否则 只获取自己id下的视频列表
         Long userid = null;
         if (self == 1) {
-            userid = user.getId(); 
+            // 获取当前用户
+            SiteUserDetail user = siteUserService.getCurrentUser();
+            userid = user.getId();
         }
         List list = mediaMappingMapper.paginQueryEx((pageNumber - 1) * pageSize, pageSize, status, statusExclude, userid);
         Long count = mediaMappingMapper.count(status, statusExclude, userid);
@@ -99,6 +97,11 @@ public class VideoService {
 
     }
 
+    /**
+     * 获取视频详情
+     * @param id   mediamapping id
+     * @return
+     */
     public VideoDetail getDetailById(Long id) {
         VideoDetail videoDetail = new VideoDetail();
 

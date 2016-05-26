@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Service("MediaMap")
+@Service("mediaMap")
 public class MediaMap implements ImediaMap {
     
     @Autowired
@@ -42,6 +42,12 @@ public class MediaMap implements ImediaMap {
     public long deleteMudiaMap(long id) {
         // TODO Auto-generated method stub
         return mediaMappingMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteMediaByTime() {
+        // TODO Auto-generated method stub
+        return mediaMappingMapper.deleteByTime();
     }
 
 }

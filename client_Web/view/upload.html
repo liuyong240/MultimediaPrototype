@@ -7,40 +7,34 @@
 {% block bodyClass %}upload-wrap{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h2>上传你的视频</h2>
+    <div class="ali-container">
+        <form id="form_upload" class="form-upload form-inline" method="post" action="http://{{domain}}:{{port}}/api/oss/putMultiAndPicDemo" enctype="application/x-www-form-urlencoded" >
+            <div class="group">
+                <label for="">视频来源 : </label>
+                <button class="btn btn-sm btn-brown" type="button">本地上传</button>
+                <button class="btn btn-sm" disabled="disabled" >从存储空间选择</button>
             </div>
-            <div class="col-md-8 col-md-offset-2">
-                <div class="row">
-                    <form id="form_upload" class="form-upload" method="post" action="http://{{domain}}:{{port}}/api/oss/putMultiAndPic" enctype="multipart/form-data" >
-                        <div class="form-group">
-                            <label for="title">标题</label>
-                            <input name="title" type="text" class="form-control" id="title" placeholder="视频标题" value="">
-                        </div>
-                        <div class="form-group">
-                            <label for="desc">描述</label>
-                            <textarea id="desc" name="desc" class="form-control" rows="3" placeholder="视频描述" value=""></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="picfile">上传视频截图</label>
-                            <input id="picfile" name="picFile" type="file" accept="image/*" id="file_video_pic"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="mediafile">上传视频</label>
-                            <input id="mediafile" name="mediaFile" type="file" id="file_video"/>
-                            <input type="hidden" name="isTranscode" value="true"/>
-                        </div>
-                        <div class="btn-bar">
-                            <button id="btn_upload_file" type="submit" class="btn btn-info">提 交</button>
-                            <button type="reset" class="btn btn-default">重 置</button>
-                        </div>
-                    </form>
-                </div>
+            <div class="group">
+                <label for="title">标题</label>
+                <input name="title" type="text" class="form-control" id="title" placeholder="视频标题" value="">
             </div>
-
-        </div>
-
+            <div class="group">
+                <label for="desc">描述</label>
+                <textarea id="desc" name="desc" class="form-control" rows="3" placeholder="视频描述" value=""></textarea>
+            </div>
+            <div class="group">
+                <label for="picfile">上传视频截图</label>
+                <input id="picfile" name="picFile" type="file" accept="image/*" id="file_video_pic"/>
+            </div>
+            <div class="group">
+                <label for="mediafile">上传视频</label>
+                <input id="mediafile" name="mediaFile" type="file" id="file_video"/>
+                <input type="hidden" name="isTranscode" value="true"/>
+            </div>
+            <div class="btn-bar">
+                <button id="btn_upload_file" type="submit" class="btn btn-yellow">确定</button>
+                <button type="reset" class="btn btn-default">取消</button>
+            </div>
+        </form>
     </div>
 {% endblock %}

@@ -9,18 +9,30 @@ angular.module('admin')
         'kai.mainNavList',
         'kai.mainNavTitle',
         'kai.mainNavUser',
-        //'$cookies',
+        '$cookies',
         function (
             $scope,
             $location,
             mainNavList,
             mainNavTitle,
-            mainNavUser
-            //$cookies
+            mainNavUser,
+            $cookies
         ) {
             $scope.list = mainNavList;
             $scope.title = mainNavTitle;
-            $scope.username = mainNavUser;//$cookies.get('kaiUsername');
+            $scope.username = $cookies.get('username') || 'defaultUser';
+
+            // 显示登录用户信息
+            $scope.isShow = false;
+            $scope.showMenu = showMenu;
+
+            $scope.$on('$routeChangeStart', function () {
+                changeTab();
+            });
+            $scope.$on('$stateChangeSuccess', function () {
+                changeTab();
+            });
+            changeTab();
 
             function changeTab() {
                 var p = $location.path();
@@ -31,11 +43,7 @@ angular.module('admin')
                 $scope.currentTab = p;
             }
 
-            $scope.$on('$routeChangeStart', function () {
-                changeTab();
-            });
-            $scope.$on('$stateChangeSuccess', function () {
-                changeTab();
-            });
-            changeTab();
+            function showMenu (){
+                $scope.isShow = $scope.isShow ? false : true;
+            };
         }]);

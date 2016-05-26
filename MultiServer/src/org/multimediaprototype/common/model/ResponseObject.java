@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 /**
- * 后台管理界面RESTful接口统一数据格式
+ * RESTful接口返回统一数据格式
  *
  * 数据包含三个字段<br>
  * code:表示操作是否成功. 0为成功, 非0为失败. 默认值为0<br>
@@ -34,7 +34,8 @@ public class ResponseObject {
         if (res.isSuccess()) {
             this.data = "ok";
         } else {
-            this.code = res.getErrorCode();
+            this.code = 1;
+            this.error = res.getErrorCode() + "," + res.getMessage();
             this.data = res.getMessage();
         }
     }

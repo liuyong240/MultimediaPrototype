@@ -1,3 +1,182 @@
 @import url("../../libs/bootstrap/dist/css/bootstrap.min.css");
 @import url("../../libs/jquery-ui-redmond/jquery-ui.css");
 @import url("../../libs/mediaelement/build/mediaelementplayer.min.css");
+
+/*
+ * footer
+ */
+footer nav {
+  width: 1200px;
+  font-size: 12px;
+  border-top: 1px solid #eaeaea;
+  padding: 20px 50px;
+  margin: 80px auto 20px;
+}
+
+footer nav .big a {
+  color: #666;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+footer nav .link-wrap a {
+  color: #b3b3b3;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+footer nav .copyright {
+  color: #999;
+}
+
+footer nav .copyright a:hover {
+  text-decoration: none;
+}
+
+/*
+ * common
+ */
+body {
+  background-color: #f9f9f9;
+}
+
+.m-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+label.error {
+  color: #f2776f;
+  font-weight: normal;
+  margin: 2px 0 0;
+}
+
+#btn_upload {
+  color: #fff;
+  line-height: 1.5;
+  background-color: #31b0d5;
+  border-color: #269abc;
+  padding: 5px 10px;
+  margin-top: 10px;
+
+}
+
+.ellipsis {
+  display: inline-block;
+  height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.error-tip,
+.success-tip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: none;
+  width: 100%;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  padding: 15px 0;
+  background-color: #f2776f;
+  z-index: 9;
+}
+
+.success-tip {
+  background-color: #00ba97;
+}
+
+.btn-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  width: 30px;
+  height: 30px;
+  background: url("/static/images/bg_btn_delete.png") no-repeat -40px 0;
+  cursor: pointer;
+}
+.btn-delete:hover {
+  display: inline-block;
+  background-position: 0 0;
+}
+
+.btn-yellow {
+  color: #fff;
+  background-color: #efc84b;
+}
+.btn-yellow:hover {
+  color: #fff;
+}
+
+.btn-brown {
+  color: #fff;
+  background-color: #625951;
+}
+.btn-brown:hover {
+  color: #fff;
+}
+/*
+ * reset bootstrap
+ */
+.ali-navbar .navbar-nav > li > a {
+  background-color: #625951;
+  padding-top: 13px;
+  padding-bottom: 12px;
+}
+
+.ali-navbar .navbar-nav > li > a.a-link {
+  padding-top: 18px;
+  padding-bottom: 17px;
+}
+
+.ali-navbar .navbar-nav > li > a:hover, .ali-navbar .navbar-nav > li > a.dropdown-toggle:hover {
+  background-color: #4e4740;
+}
+
+.ali-navbar .dropdown-menu {
+  background-color: #625951;
+}
+
+.ali-navbar .navbar-nav > li > .dropdown-menu {
+  margin-top: -1px;
+}
+
+.ali-navbar .dropdown-menu > li > a {
+  color: #fff;
+}
+
+.ali-navbar .dropdown-menu > li > a:hover, .ali-navbar .dropdown-menu > li > a:focus {
+  color: #fff;
+  background-color: #4e4740;
+}
+
+.ali-container {
+  width: 1200px;
+  min-height: 495px;
+  margin: 0 auto;
+}
+
+/* reset bootstrap */
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+  background-color: #efc24b;
+  border-color: #efc24b;
+}
+
+.pagination > li > a, .pagination > li > span {
+  color: #777;
+}
+
+.pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
+  color: #777;
+}

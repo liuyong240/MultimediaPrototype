@@ -33,7 +33,6 @@ public class SiteUserController {
     @ApiOperation("获取用户列表")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseObject getUsers() {
-        logger.info("123");
         List<SiteUser> list = siteUserService.get(null, null);
         ResponseObject res = new ResponseObject();
         res.setData(list);

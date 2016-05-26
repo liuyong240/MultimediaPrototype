@@ -8,14 +8,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jws.soap.SOAPBinding;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multimediaprototype.base.Constants;
-import org.multimediaprototype.oss.base.impl.MultiOSSApi;
-import org.multimediaprototype.oss.base.impl.OSSApi;
-import org.multimediaprototype.oss.dao.impl.MediaMap;
-import org.multimediaprototype.oss.dao.impl.OSSManage;
+import org.multimediaprototype.oss.base.IMultiOSSApi;
+import org.multimediaprototype.oss.base.IOSSAPi;
+import org.multimediaprototype.oss.dao.IOSSManage;
+import org.multimediaprototype.oss.dao.ImediaMap;
 import org.multimediaprototype.oss.dao.model.MediaMapping;
 import org.multimediaprototype.oss.dao.model.OSSFile;
 import org.multimediaprototype.oss.service.IOSSService;
@@ -34,16 +36,16 @@ import com.aliyun.oss.model.CompleteMultipartUploadResult;
 public class OSSService implements IOSSService {
 
     @Autowired
-    private OSSApi OSSApi;
+    private IOSSAPi OSSApi;
 
     @Autowired
-    private MultiOSSApi multiOSSApi;
+    private IMultiOSSApi multiOSSApi;
 
     @Autowired
-    private OSSManage ossManage;
+    private IOSSManage OSSManage;
 
     @Autowired
-    private MediaMap mediaMap;
+    private ImediaMap mediaMap;
 
     @Value("#{propsUtil['aliyunConsole.bucket']}")
     private String defaultBucket;
@@ -56,7 +58,13 @@ public class OSSService implements IOSSService {
 
     @Value("#{propsUtil['aliyunConsole.ossEndpointHz']}")
     private String ossEndpointHz;
+    
+    @Value("#{propsUtil['aliyunConsole.demo']}")
+    private String mediademo;
 
+    @Value("#{propsUtil['aliyunConsole.ossWriteSubdirdemo']}")
+    private String ossWriteSubdirdemo;
+    
     private static Logger log = LogManager.getLogger(OSSService.class);
 
     /**
@@ -108,7 +116,7 @@ public class OSSService implements IOSSService {
     @Override
     public List<OSSFile> getUserOssList(Long userId, Integer offset,
                                         Integer rowCount) {
-        return ossManage.getOssList(userId, offset, rowCount);
+        return OSSManage.getOssList(userId, offset, rowCount);
     }
 
     /**
@@ -119,11 +127,11 @@ public class OSSService implements IOSSService {
      */
     @Override
     public long deleteOss(long id) {
-        OSSFile aFile = ossManage.getOssdetail(id);
+        OSSFile aFile = OSSManage.getOssdetail(id);
         String osskeyString = aFile.getUserid().toString() + "/"
                 + aFile.getObjectName();
         OSSApi.deleteObject(aFile.getBucketName(), osskeyString);
-        return ossManage.delete(id);
+        return OSSManage.delete(id);
     }
 
     @Override
@@ -168,7 +176,7 @@ public class OSSService implements IOSSService {
         ossFile.setGmtCreated(new Date());
         ossFile.setObjectName(key);
         ossFile.setLocation(defaultLocation);
-        long i = ossManage.addOss(ossFile);
+        long i = OSSManage.addOss(ossFile);
         return ossFile;
     }
 
@@ -306,6 +314,18 @@ public class OSSService implements IOSSService {
         return mediaMapping;
     }
 
+    /**
+     * 更新视频文件对于关系
+     *
+     * @param id 记录id
+     * @param mediaId   视频文件存储id
+     * @param picId   视频图片存储id
+     * @param desc   视频文件描述
+     * @param isDelete   视频文件是否需要删除
+     * @param status   视频文件的状态
+     * @param title    视频文件的title
+     * @return MediaMapping 返回视频对应关系
+     */
     @Override
     public MediaMapping updateMediaMap(Long id, Long mediaId, Long picId,
                                        String desc, Boolean isDelete, Integer status, String title) {
@@ -352,9 +372,16 @@ public class OSSService implements IOSSService {
 
     }
 
+    /**
+     * 更新视频文件状态
+     *
+     * @param url 视频文件url
+     * @param state   视频文件的状态
+     * @return  
+     */
     @Override
     public void updateMediaMapStatus(String url, String state) {
-        OSSFile file = ossManage.getByUrl(url);
+        OSSFile file = OSSManage.getByUrl(url);
         Long mediaId = file.getId();
         MediaMapping mediaMapping = mediaMap.getMediaMapByMediaId(mediaId);
         Integer status;
@@ -368,12 +395,32 @@ public class OSSService implements IOSSService {
         mediaMap.updataMediaMap(mediaMapping);
     }
 
+    /**
+     * 删除视频文件
+     *
+     * @param id 视频文件记录id
+     * @return  删除条数
+     */
     @Override
     public long deleteMediaMap(Long id) {
         MediaMapping media = mediaMap.getMediaMap(id);
         deleteOss(media.getMediaId());
         deleteOss(media.getPicId());
         return mediaMap.deleteMudiaMap(id);
+    }
+
+ 
+    /**
+     * 删除某一个对象下的所有文件
+     *
+     * @param bucketName ossbucket名字
+     * @param prefix 前缀
+     * @return 
+     */  
+    @Override
+    public void deleteObjects(String bucketName, String prefix) {
+        // TODO Auto-generated method stub
+        OSSApi.deleteObjects(bucketName, prefix);
     }
 
 }

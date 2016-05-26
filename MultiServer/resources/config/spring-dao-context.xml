@@ -13,7 +13,7 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <context:property-placeholder
-            location="classpath*:config/multi.properties,classpath*:config/env-aliyunConsole.properties"/>
+            location="classpath:env-aliyunConsole.properties"/>
 
     <!--动态选择数据源 -->
     <bean id="dataSource" class="org.multimediaprototype.common.datasource.DynamicDataSource">
@@ -25,6 +25,7 @@
         </property>
         <property name="defaultTargetDataSource" ref="ds_r"/>
     </bean>
+   
     <!--读 数据源 -->
     <bean id="ds_r" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close" lazy-init="true">
@@ -88,6 +89,8 @@
         <constructor-arg name="accessKeyId" value="${aliyunConsole.accesskeyId}"/>
         <constructor-arg name="secretAccessKey" value="${aliyunConsole.accesskeySecret}"/>
     </bean>
+    
+    
 
 
     <!-- JDBC模板 -->
